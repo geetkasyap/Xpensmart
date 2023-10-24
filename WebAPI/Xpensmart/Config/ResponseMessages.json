@@ -1,0 +1,113 @@
+{
+  "GenericMessages": {
+    "Values": {
+      "AddUserSuccess": "User Added Successfully",
+      "AddUserFail": "User Adding Failed",
+      "AddUserEmpty": "User data empty",
+      "GetUserDetailsSuccess": "User details fetched Successfully",
+      "GetUserDetailsFail": "User details fetching failed",
+      "UpdateUserDetailsSuccess": "Updated user details Successfully",
+      "UpdateUserDetailsFail": "Updating user details Failed",
+      "DeleteUserSuccess": "User deleted Successfully",
+      "DeleteUserFail": "User deletion Failed",
+
+      "AvailableUserNameSuccess": "UserName Available",
+      "AvailableUserNameFail": "UserName NotAvailable",
+      "UserNameNull": "entered username null",
+
+      "AvailableEmailFail": "Email NotAvailable",
+      "AvailableEmailSuccess": "Email Available",
+      "getUserIDNull": "entered userID is null",
+      "getUserIDFail": "Fetching UserID failed",
+
+      "CreateSharedUserSuccess": "Created Shared User Successfully",
+      "CreateSharedUserFail": "Created Shared User Failed",
+      "CreateSharedUserNull": "Shared User data sent as Null",
+
+      "AddExpensesSuccess": "Expenses Added Successfully",
+      "AddExpensesFail": "Expenses Adding Failed",
+      "GetExpensesDetailsSuccess": "Expenses details fetched Successfully",
+      "GetExpensesDetailsFail": "Expenses details fetching failed",
+      "UpdateExpensesDetailsSuccess": "Updated Expense details Successfully",
+      "UpdateExpensesDetailsFail": "Updating Expense details Failed",
+      "DeleteExpensesSuccess": "Expenses deleted Successfully",
+      "DeleteExpensesFail": "Expenses deletion Failed",
+      "ExpenseDataNull": "Some entered details are existed Empty",
+      "UpdateExpenseMismatch": "Expense details Mismatch",
+
+      "AddBudgetSuccess": "Budget Added Successfully",
+      "AddBudgetFail": "Budget Adding Failed",
+      "GetBudgetDetailsSuccess": "Budget details fetched Successfully",
+      "GetBudgetDetailsFail": "Budget details fetching failed",
+      "UpdateBudgetDetailsSuccess": "Updated Budget details Successfully",
+      "UpdateBudgetDetailsFail": "Updating Budgte details Failed",
+      "DeleteBudgetsSuccess": "Budget deleted Successfully",
+      "DeleteBudgetsFail": "Budget deletion Failed",
+      "BudgetAlreadyExists": "A Budget was already set by you in these dates - Change date to add Budget",
+      "BudgetDataNull": "Some entered details are existed Empty",
+
+      "AddSplitExpenseSuccess": "Split Expense Added Successfully",
+      "AddSplitExpenseFail": "Split Expense Adding Failed",
+
+      "AddTransactionsSuccess": "Recurring Transactions Added Successfully",
+      "AddTransactionsFail": "Recurring Transactions Adding Failed",
+      "GetTransactionsDetailsSuccess": "Recurring Transactions details fetched Successfully",
+      "GetTransactionsDetailsFail": "Recurring Transactions details fetching failed",
+      "UpdateTransactionsDetailsSuccess": "Updated Recurring expense details Successfully",
+      "UpdateTransactionsDetailsFail": "Updating Recurring expense details Failed",
+      "DeleteTransactionsSuccess": "Recurring Transactions deleted Successfully",
+      "DeleteTransactionsFail": "Recurring Transactions deletion Failed",
+      "ExpenseIDMismatch": "Expense ID mismatched, transaction details failed",
+
+      "InSufficientReconciliation": "The sum of user amounts does not match the total amount",
+
+      "InvalidHeaders": "Invalid headers in the CSV file. Required headers: CategoryName, Amount, Date",
+      "NoFileUpload": "No File Uploaded",
+
+      "BulkExpenseSuccess": "Bulk Expenses added Successfully",
+      "BulkExpenseFail": "Bulk Expenses adding failed",
+
+      "RequestedNull": "Group creation request failed",
+
+      "CreateGroupSuccess": "Created Group Successfully",
+      "CreateGroupFail": "Group creation failed",
+      "InvalidRequest": "Invalid group Expense request",
+      "AddGroupExpenseSuccess": "Group Expenses added successfully",
+      "AddGroupExpenseFail": "Adding Group Expenses Failed",
+      "InvalidReconciliation": "Invalid Reconcillation request",
+      "ReconciliationSuccess": "Reconciliation done successfully",
+      "ReconciliationFail": "Reconciliation Failed",
+      "ExpenseSettleFail": "Expense Settle Failed",
+      "ExpenseSettleSuccess": "Expense Settled Successfully",
+
+      "UnsettledGroup": "Group expense still not completely settled",
+      "DeleteGroupSuccess": "Group deleted successfully",
+      "DeleteGroupFail": "Group deletion failed",
+
+      "NotificationNull": "Notifications are empty",
+      "AddNotificationsSuccess": "Notifications added successfully",
+      "AddNotificationsFail": "Notifications added Failed",
+      "ReadNotificationSuccess": "Notifications read",
+      "ReadNotificationFail": "Notifications not read",
+      "DeleteNotificationSuccess": "Notifications deleted successfully",
+      "DeleteNotificationFail": "Notifications deletion failed",
+
+      "UpdateSharedUserSuccess": "Shared user updated successfully",
+      "UpdateSharedUserFail": "Shared user updating failed",
+      "DeleteSharedUserFail": "Shared User deleted successfully",
+      "DeleteSharedUserSuccess": "Shared user deletion failed",
+
+      "SplitExpenseNull": "Entered Split Details null",
+      "SplitExpenseSuccess": "Splitted Expense Successfully",
+      "SplitExpenseFail": "Split Expenses Fail",
+
+      "EmailRequired": "Email required for password retrival",
+      "InvalidEmail": "Ivalid Email Entered",
+      "ForgotPasswordFail": "Password not retrived, Please try again"
+
+
+
+
+    }
+  }
+}
