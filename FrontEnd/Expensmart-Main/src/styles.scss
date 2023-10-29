@@ -1,0 +1,63 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+
+body.dark-theme {
+  background-color: #121212;
+  color: #ffffff;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-theme .mat-button {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+body.dark-theme .mat-card {
+  background-color: #222222;
+  color: #ffffff;
+}
+
+body.dark-theme .mat-form-field-appearance-fill.mat-primary .mat-form-field-flex {
+  background-color: #333333;
+}
+
+body.dark-theme .mat-form-field-appearance-fill.mat-primary .mat-form-field-infix {
+  border-bottom-color: #ffffff;
+}
+
+body.dark-theme .mat-select-panel {
+  background-color: #222222;
+  color: #ffffff;
+}
+
+body.dark-theme .mat-option.mat-selected:not(.mat-option-disabled) {
+  background-color: #333333;
+  color: #ffffff;
+}
+body{
+  .mat-dialog-container {
+    backdrop-filter: blur(5px);
+  }
+  
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background:#2d2d2d;
+    border-radius: 3px; 
+  }
+  
+  &::-webkit-scrollbar-thumb:hover {
+    background: #44006b; 
+  }
+  
+  &::-webkit-scrollbar-track {
+    background:black;
+  }
+}
+

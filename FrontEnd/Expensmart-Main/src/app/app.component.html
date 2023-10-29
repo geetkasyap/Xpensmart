@@ -1,0 +1,7 @@
+<body>
+  <app-navbar *ngIf="showNavbar" (LogOut)="Logout($event)"></app-navbar>
+  <app-side-bar></app-side-bar>
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+</body>

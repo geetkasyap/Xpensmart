@@ -1,0 +1,13 @@
+{
+    "formIdentifiers": {
+        "validationMessages": {
+        "minlength": "Minimum length is {0} characters.",
+        "maxLength": "Maximum length is {0} characters.",
+        "pattern": "Invalid format.",
+        "alphaPattern": "Only letters and spaces are allowed.",
+        "min": "Value must be at least {0}.",
+        "required": "Mandatory Field",
+        "max": "Value must less than {9999999999999999.99}"
+        }
+    }
+}
