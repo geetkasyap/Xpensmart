@@ -1,0 +1,195 @@
+<section class="background-radial-gradient overflow-hidden">
+  <div class="currency-container">
+    <span class="currency-symbol">$</span>
+    <span class="currency-symbol">€</span>
+    <span class="currency-symbol">£</span>
+    <span class="currency-symbol">Xpensmart</span>
+    <span class="currency-symbol">¥</span>
+    <span class="currency-symbol">₹</span>
+    <span class="currency-symbol">$</span>
+    <span class="currency-symbol">€</span>
+    <span class="currency-symbol">£</span>
+    <span class="currency-symbol">¥</span>
+    <span class="currency-symbol">Xpensmart</span>
+    <span class="currency-symbol">₹</span>
+    <span class="currency-symbol">$</span>
+    <span class="currency-symbol">€</span>
+    <span class="currency-symbol">£</span>
+    <span class="currency-symbol">Xpensmart</span>
+    <span class="currency-symbol">¥</span>
+    <span class="currency-symbol">₹</span>
+    <span class="currency-symbol">$</span>
+    <span class="currency-symbol">€</span>
+  </div>
+
+  <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
+    <div class="row gx-lg-5 align-items-center mb-5">
+      <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
+        <h1 class="my-5 display-5 fw-bold ls-tight">
+          The Best Ever<br/>
+          <span class="secondary-text">Expense Management System</span>
+        </h1>
+        <p class="mb-4 opacity-70 description-text">
+          Unlock the power of financial freedom with the <b style="color: #6C63FF;">Xpensmart!</b> Say goodbye to financial confusions and hello to clarity as you take control of your personal expenses like never before. Our system effortlessly tracks your spending, giving you insightful analysis on where your money is going and highlighting areas that need attention.
+          Imagine having a tool that not only helps you budget effectively but also enhances your financial awareness! With Xpensmart, you can categorize your expenses with ease, saving you precious time and energy for what truly matters. Plus, we prioritize your data security, ensuring that your information is safe while you embark on this exciting journey towards economic stability.
+          Get ready to elevate your financial game and pave the way for a brighter future! Don’t wait—experience the Xpensmart today and take the first step toward mastering your finances! 🌟
+        
+        </p>
+      </div>
+
+      <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
+        <div class="card bg-glass">
+          <div class="card-body px-4 py-5 px-md-5">
+            <h2 class="text-center text-white mb-5">Sign Up</h2>
+            
+            <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+              <div class="form-outline mb-4">
+                <div class="input-group">
+                  <input
+                    type="text"
+                    id="username"
+                    formControlName="username"
+                    class="form-control custom-input"
+                    [ngClass]="{
+                      'is-invalid': (signupForm.get('username')?.errors && signupForm.get('username')?.touched) || usernameExists
+                    }"
+                  />
+                  <label class="form-label" [class.active]="signupForm.get('username')?.value" >Username</label>
+                </div>
+                <div><p class="validationMessage">UserName need to be Unique and contain between 3~20 characters </p></div>
+                <div class="invalid-feedback" *ngIf="signupForm.get('username')?.touched" style="display: block;">
+                  <span *ngIf="signupForm.get('username')?.errors?.['required']">
+                    Username is required
+                  </span>
+                  <span *ngIf="signupForm.get('username')?.errors?.['usernameExists']">
+                    Username is already taken
+                  </span>
+                  <span *ngIf="signupForm.get('username')?.errors?.['pattern']">
+                    UserName need to contain between 3~20 characters and no spaces
+                  </span>
+                </div>                
+              </div>              
+
+              <div class="form-outline mb-4">
+                <input
+                  type="text"
+                  id="fullName"
+                  formControlName="fullName"
+                  class="form-control custom-input"
+                  [ngClass]="{'is-invalid': signupForm.get('fullName')?.errors && signupForm.get('fullName')?.touched}"
+                />
+                <label class="form-label" [class.active]="signupForm.get('fullName')?.value">Full Name</label>
+                <div><p class="validationMessage">fullName need to contain between 3~50 characters </p></div>
+                <div class="invalid-feedback" *ngIf="signupForm.get('fullName')?.touched">
+                  <span *ngIf="signupForm.get('fullName')?.errors?.['required']">
+                    Full Name is required
+                  </span>
+                  <span *ngIf="signupForm.get('fullName')?.errors?.['pattern']">
+                    Full Name should only contain letters and one space between words
+                  </span>
+                  <span *ngIf="signupForm.get('fullName')?.errors?.['minlength']">
+                    Full Name must be at least 3 characters long 
+                  </span>
+                  <span *ngIf="signupForm.get('fullName')?.errors?.['maxlength']">
+                    Full Name must be at less than 50 characters long 
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-outline mb-4">
+                <input
+                  type="email"
+                  id="email"
+                  formControlName="email"
+                  class="form-control custom-input"
+                  [ngClass]="{'is-invalid': signupForm.get('email')?.errors && signupForm.get('email')?.touched}" 
+                />
+                <label class="form-label" [class.active]="signupForm.get('email')?.value">Email</label>
+                <div><p class="validationMessage">Email need to be Unique as atmost 100 characters </p></div>
+                <div class="invalid-feedback" *ngIf="signupForm.get('email')?.touched">
+                  <span *ngIf="signupForm.get('email')?.errors?.['required']">
+                    Email is required
+                  </span>
+                  <span *ngIf="signupForm.get('email')?.errors?.['pattern']">
+                    Please enter a valid email address
+                  </span>
+                  <span *ngIf="signupForm.get('email')?.errors?.['emailExists']">
+                    Email is already taken
+                  </span>
+                  <span *ngIf="signupForm.get('email')?.errors?.['maxlength']">
+                    Email too long
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-outline mb-4">
+                <div class="input-group">
+                  <input
+                    [type]="showPassword ? 'text' : 'password'"
+                    id="password"
+                    formControlName="password"
+                    class="form-control custom-input"
+                    [ngClass]="{'is-invalid': signupForm.get('password')?.errors && signupForm.get('password')?.touched}"
+                  />
+                  <button type="button" class="btn btn-outline-secondary" (click)="togglePassword()">
+                    <i class="fas" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+                  </button>
+                </div>
+                <label class="form-label" [class.active]="signupForm.get('password')?.value">Password</label>
+                <div><p class="validationMessage">Password must include at least one uppercase letter,lowercase letter, and one number and atleast 8 characters</p></div>
+                <div class="invalid-feedback" *ngIf="signupForm.get('password')?.touched" style="display: block;">
+                  <span *ngIf="signupForm.get('password')?.errors?.['required']">
+                    Password is required
+                  </span>
+                  <span *ngIf="signupForm.get('password')?.errors?.['minlength']">
+                    Password must be at least 8 characters long
+                  </span>
+                  <span *ngIf="signupForm.get('password')?.errors?.['passwordStrength']">
+                    Password must include at least one uppercase letter, one lowercase letter, one number and no spaces 
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-outline mb-4">
+                <div class="input-group">
+                  <input
+                    [type]="showConfirmPassword ? 'text' : 'password'"
+                    id="confirmPassword"
+                    formControlName="confirmPassword"
+                    class="form-control custom-input"
+                    [ngClass]="{'is-invalid': signupForm.get('confirmPassword')?.errors && signupForm.get('confirmPassword')?.touched}"
+                  />
+                  <button type="button" class="btn btn-outline-secondary" (click)="toggleConfirmPassword()">
+                    <i class="fas" [ngClass]="showConfirmPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+                  </button>
+                </div>
+                <label class="form-label" [class.active]="signupForm.get('confirmPassword')?.value">Confirm Password</label>
+                <div><p class="validationMessage">Re-Enter the password same as above</p></div>
+                <div class="invalid-feedback" *ngIf="signupForm.get('confirmPassword')?.touched" style="display: block;">
+                  <span *ngIf="signupForm.get('confirmPassword')?.errors?.['required']">
+                    Confirm Password is required
+                  </span>
+                  <span *ngIf="signupForm.get('confirmPassword')?.errors?.['passwordMismatch']">
+                    Passwords do not match
+                  </span>
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                class="btn btn-primary btn-block mb-4"
+                [disabled]="signupForm.invalid || isLoading || !passwordStrengthValid"
+              >
+                <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2"></span>
+                Sign Up
+              </button>
+            </form>
+            <div class="login-prompt">
+              Already a User? <a href="http://localhost:8989/Login">Login</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

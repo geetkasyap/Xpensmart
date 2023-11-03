@@ -1,0 +1,71 @@
+<section class="background-radial-gradient overflow-hidden">
+  <div class="currency-container">
+    <span class="currency-symbol">$</span>
+    <span class="currency-symbol">€</span>
+    <span class="currency-symbol">£</span>
+    <span class="currency-symbol">¥</span>
+    <span class="currency-symbol">₹</span>
+    <span class="currency-symbol">$</span>
+    <span class="currency-symbol">€</span>
+    <span class="currency-symbol">£</span>
+    <span class="currency-symbol">¥</span>
+    <span class="currency-symbol">₹</span>
+    <span class="currency-symbol">$</span>
+    <span class="currency-symbol">€</span>
+    <span class="currency-symbol">£</span>
+    <span class="currency-symbol">¥</span>
+    <span class="currency-symbol">₹</span>
+    <span class="currency-symbol">$</span>
+    <span class="currency-symbol">€</span>
+  </div>
+    <div class="container">
+      <h1 class="main-title">
+        Welcome to <span class="accent-text">Xpensmart</span>
+      </h1>
+  
+      <div class="carousel-container">
+        <div class="carousel-wrapper">
+          <div class="carousel-card" 
+               *ngFor="let item of carouselItems; let i = index"
+               [@cardAnimation]="getAnimationState(i)"
+               (mouseenter)="setHovered(true)"
+               (mouseleave)="setHovered(false)">
+            <div class="card-content">
+              <div class="card-gradient-overlay"></div>
+              <img [src]="item.imagePath" [alt]="item.title" class="card-image">
+              <div class="card-info">
+                <h3>{{item.title}}</h3>
+                <p>{{item.description}}</p>
+              </div>
+              
+              <div class="hover-overlay" *ngIf="i === activeIndex">
+                <p>{{item.hoverText}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <button class="nav-button prev" (click)="prevSlide()">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="nav-button next" (click)="nextSlide()">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      
+
+        <div class="buttons">
+          <div class="px-5">
+          <button class="btn neon-pulse" (click)="signUp()">
+            <span>SignUp</span>
+          </button>
+        </div>
+        <div class="px-5">
+          <button class="btn neon-pulse" (click)="login()">
+            <span>Login</span>
+          </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+</section>

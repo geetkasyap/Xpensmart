@@ -1,0 +1,10 @@
+
+  <div class="sidebar">
+    <div class="sidebar-item" *ngFor="let item of menuItems" 
+         (mouseover)="showTooltip(item.name)" 
+         (mouseleave)="hideTooltip()" 
+         (click)="navigate(item.route)">
+      <mat-icon>{{ item.icon }}</mat-icon>
+      <span class="tooltip" *ngIf="tooltipVisible && tooltipItem === item.name">{{ item.name }}</span>
+    </div>
+  </div>

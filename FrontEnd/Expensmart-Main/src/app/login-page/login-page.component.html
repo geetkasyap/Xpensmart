@@ -1,0 +1,114 @@
+<div class="background-radial-gradient">
+  <div class="currency-container">
+    <span class="currency-symbol">$</span>
+    <span class="currency-symbol">€</span>
+    <span class="currency-symbol">£</span>
+    <span class="currency-symbol">¥</span>
+    <span class="currency-symbol">₹</span>
+    <span class="currency-symbol">$</span>
+    <span class="currency-symbol">€</span>
+    <span class="currency-symbol">£</span>
+    <span class="currency-symbol">¥</span>
+    <span class="currency-symbol">₹</span>
+    <span class="currency-symbol">$</span>
+    <span class="currency-symbol">€</span>
+    <span class="currency-symbol">£</span>
+    <span class="currency-symbol">¥</span>
+    <span class="currency-symbol">₹</span>
+    <span class="currency-symbol">$</span>
+    <span class="currency-symbol">€</span>
+  </div>
+
+  <div class="login-container">
+    <div *ngIf="!showForgotPassword" class="login-card">
+      <div class="login-header">
+        <h1>Expensmart</h1>
+        <p>Welcome back! Please login to your account.</p>
+      </div>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+        <div class="form-group">
+          <label>Email</label>
+          <div class="input-wrapper">
+            <i class="fas fa-envelope"></i>
+            <input type="email" formControlName="email" placeholder="Enter your email" />
+          </div>
+          <div *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.touched || loginForm.get('email')?.dirty)" class="error-message">
+            {{ getErrorMessage('email') }}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Password</label>
+          <div class="input-wrapper">
+            <i class="fas fa-lock"></i>
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              formControlName="password"
+              placeholder="Enter your password"
+            />
+            <button
+              type="button"
+              class="toggle-password"
+              (click)="togglePasswordVisibility()"
+            >
+              <i class="fas" [class.fa-eye]="!showPassword" [class.fa-eye-slash]="showPassword"></i>
+            </button>
+          </div>
+          <div *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.touched || loginForm.get('password')?.dirty)" class="error-message">
+            {{ getErrorMessage('password') }}
+          </div>
+                </div>
+
+        <button type="submit" class="login-button" [disabled]="isLoading">
+          {{ isLoading ? 'Logging in...' : 'Login' }}
+        </button>
+
+        <div class="forgot-password" (click)="showForgotPassword = true">
+          Forgot Password?
+        </div>
+
+        <div class="signup-prompt">
+          Don't have an account? <a routerLink="/SignUp">Sign up</a>
+        </div>
+      </form>
+    </div>
+
+    <div *ngIf="showForgotPassword" class="login-card">
+      <div class="login-header">
+        <button class="back-button" (click)="showForgotPassword = false">
+          <i class="fas fa-arrow-left"></i> Back
+        </button>
+        <h1>Forgot Password</h1>
+        <p>Enter your email to retrieve your password.</p>
+      </div>
+
+      <form [formGroup]="forgotPasswordForm" (ngSubmit)="onForgotPasswordSubmit()" class="login-form">
+        <div class="form-group">
+          <label>Email</label>
+          <div class="input-wrapper">
+            <i class="fas fa-envelope"></i>
+            <input type="email" formControlName="email" placeholder="Enter your email" />
+          </div>
+          <div *ngIf="forgotPasswordForm.get('email')?.invalid && (forgotPasswordForm.get('email')?.touched || forgotPasswordForm.get('email')?.dirty)" class="error-message">
+            {{ getForgotPasswordErrorMessage() }}
+          </div>
+        </div>
+
+        
+        <button type="submit" class="login-button" [disabled]="isForgotPasswordLoading">
+          {{ isForgotPasswordLoading ? 'Retrieving...' : 'Continue' }}
+        </button>
+
+        <div *ngIf="retrievedPassword" class="password-display">
+          <p>Your password is: <strong>{{ retrievedPassword }}</strong></p>
+          <button class="copy-button" (click)="copyPassword()">Copy Password</button>
+        </div>
+
+        <div class="signup-prompt" style="color: #6C63FF;">
+        <a (click)="showForgotPassword = false">Back to Login</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
