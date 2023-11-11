@@ -1,0 +1,227 @@
+@use "sass:math";
+$bg-primary: #1a1a1a;
+$bg-secondary: #2d2d2d;
+
+$text-primary: #dadada;
+$text-secondary: #dfdfdf;
+$accent-primary: #6C63FF;
+$accent-secondary: #44006b;
+$error-color: #ff4d4d;
+$input-bg: rgba(45, 45, 45, 0.9);
+$card-bg: rgba(45, 45, 45, 0.8);
+
+.background-radial-gradient {
+  background-color: $bg-primary;
+  background-image: radial-gradient(
+    650px circle at 0% 0%,
+    rgba(108, 99, 255, 0.15) 15%,
+    rgba(108, 99, 255, 0.1) 35%,
+    rgba(26, 26, 26, 0.9) 75%,
+    rgba(26, 26, 26, 1) 80%,
+    transparent 100%
+  );
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+.Textbox
+{
+  border-color: #f33636;
+    display: flex; justify-content: center; align-items: center;
+  color: linear-gradient(45deg, #1a1a1a 0%, #2d2d2d 100%);
+
+}
+.currency-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.currency-symbol {
+  position: absolute;
+  color: rgba($accent-primary, 0.2);
+  font-size: 2rem;
+  font-weight: bold;
+  animation: float-currency 15s linear infinite;
+  
+  @for $i from 1 through 15 {
+    &:nth-child(#{$i}) {
+      left: #{math.random() * 100}vw;
+      top: -30px;
+      animation-delay: #{math.random() * 15}s;
+      animation-duration: #{10 + math.random() * 20}s;
+      font-size: #{1.5 + math.random() * 2}rem;
+      opacity: #{0.1 + math.random() * 0.3};
+    }
+  }
+}
+@keyframes float-currency {
+  0% {
+    transform: translateY(-30px) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+
+.summary-container {
+    padding: 2rem;
+    min-height: 300px;
+  }
+  
+  .cards-wrapper {
+    display: flex;
+    gap: 3rem;
+    flex-wrap: wrap;
+    perspective: 1000px;
+    align-content: center;
+    justify-content: space-evenly;
+  }
+  
+  .expense-card {
+    background: $card-bg;
+    border-radius: 12px;
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 390px;
+    min-height: 180px;
+    position: relative;
+    transition: transform 0.5s ease-in-out;
+    transform-style: preserve-3d;
+    border: 1px solid rgba($accent-primary, 0.1);
+    
+    &:hover {
+      border-color: $accent-primary;
+      box-shadow: 0 0 15px rgba($accent-primary, 0.2);
+      animation: cardGlow 1.5s ease-in-out infinite;
+    }
+  
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      color: $text-primary;
+      
+      mat-icon {
+        color: $accent-primary;
+      }
+      
+      h3 {
+        margin: 0;
+        font-size: 1.25rem;
+      }
+    }
+  }
+  .expense-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-height: 100px; 
+    overflow-y: auto;
+    padding-right: 0.5rem;
+  
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+  
+    &::-webkit-scrollbar-thumb {
+      background: $accent-primary; 
+      border-radius: 3px; 
+    }
+  
+    &::-webkit-scrollbar-thumb:hover {
+      background: lighten-color($accent-primary, 10%); 
+    }
+  
+    &::-webkit-scrollbar-track {
+      background: $bg-secondary; 
+    }
+  }
+    .expense-details {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+      
+      .category {
+        color: $text-primary;
+        font-weight: 500;
+      }
+      
+      .amount {
+        color: $accent-primary;
+        font-weight: 500;
+      }
+    }
+    
+    .expense-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.875rem;
+      color: $text-secondary;
+      
+      .date {
+        background: rgba($accent-primary, 0.1);
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+      }
+      
+      .description {
+        opacity: 0.8;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 150px;
+      }
+    }
+  
+  .no-data {
+    text-align: center;
+    color: $text-secondary;
+    padding: 2rem;
+  }
+  
+  @keyframes cardGlow {
+    0%, 100% {
+      box-shadow: 0 0 5px rgba($accent-primary, 0.2);
+    }
+    50% {
+      box-shadow: 0 0 20px rgba($accent-primary, 0.4);
+    }
+  }
+
+  @keyframes fadeInOut {
+    0% {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @function lighten-color($color,$percentage)
+{
+@return mix(rgb(255, 255, 255),$color,$percentage);
+}
+.loading-indicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  color: $accent-secondary;
+  z-index: 1000;
+}

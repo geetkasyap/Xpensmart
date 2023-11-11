@@ -1,0 +1,68 @@
+<div class="cards-wrapper">
+    <div class="expense-card">
+      <div class="card-header">
+        <mat-icon>history</mat-icon>
+        <h3>Recent Expenses</h3>
+      </div>
+      <div class="expense-list" #recentExpensesList>
+        <div *ngFor="let expense of recentExpenses" class="expense-item" [@fadeInOut]>
+          <div class="expense-details">
+            <span class="category">{{getCategoryName(expense.categoryID)}}</span>
+            <span class="amount">₹{{expense.amount}}</span>
+          </div>
+          <div class="expense-meta">
+            <span class="date">{{expense.date | date:'shortDate'}}</span>
+            <span class="description">{{expense.description}}</span>
+          </div>
+        </div>
+        <div *ngIf="recentExpenses.length === 0" class="no-data">
+          No recent expenses
+        </div>
+      </div>
+    </div>
+
+    <div class="expense-card">
+      <div class="card-header">
+        <mat-icon>event_upcoming</mat-icon>
+        <h3>Upcoming Expenses</h3>
+      </div>
+      <div class="expense-list" #upcomingExpensesList>
+        <div *ngFor="let expense of upcomingExpenses" class="expense-item" [@fadeInOut]>
+          <div class="expense-details">
+            <span class="category">{{getCategoryName(expense.categoryID)}}</span>
+            <span class="amount">₹{{expense.amount}}</span>
+          </div>
+          <div class="expense-meta">
+            <span class="date">{{expense.date | date:'shortDate'}}</span>
+            <span class="description">{{expense.description}}</span>
+          </div>
+        </div>
+        <div *ngIf="upcomingExpenses.length === 0" class="no-data">
+          No upcoming expenses
+        </div>
+      </div>
+    </div>
+
+    <div class="expense-card">
+      <div class="card-header">
+        <mat-icon>pending_actions</mat-icon>
+        <h3>Remaining Expenses</h3>
+      </div>
+      <div class="expense-list" #remainingExpensesList>
+        <div *ngFor="let expense of remainingExpenses" class="expense-item" [@fadeInOut]>
+          <div class="expense-details">
+            <span class="category">{{getCategoryName(expense.categoryID)}}</span>
+            <span class="amount">₹{{expense.amount}}</span>
+          </div>
+          <div class="expense-meta">
+            <span class="date">{{expense.date | date:'shortDate'}}</span>
+            <span class="description">{{expense.description}}</span>
+          </div>
+        </div>
+        <div *ngIf="remainingExpenses.length === 0" class="no-data">
+          No remaining expenses
+        </div>
+      </div>
+    </div>
+  </div>
+

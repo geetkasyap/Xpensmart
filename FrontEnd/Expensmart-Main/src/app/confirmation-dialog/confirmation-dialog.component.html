@@ -1,0 +1,10 @@
+<div class="dialogBody">
+<h2 mat-dialog-title style="color: white;">Confirmation</h2>
+<mat-dialog-content>
+  <p style="color: aliceblue;">{{ data.message }}</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onCancel()" style="color: #ff4d4d;">Cancel</button>
+  <button mat-button color="warn" (click)="onConfirm()">Delete</button>
+</mat-dialog-actions>
+</div>

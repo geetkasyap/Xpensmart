@@ -1,0 +1,15 @@
+mat-dialog-content {
+    text-align: center;
+  }
+  
+  mat-dialog-actions {
+    display: flex;
+    justify-content: space-between;
+  }
+  .mat-dialog-container {
+    backdrop-filter: blur(30px);
+  }
+  .dialogBody
+  {
+    background-color: #2d2d2d;
+  }

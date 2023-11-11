@@ -1,0 +1,37 @@
+
+  <div class="import-container">
+    <div class="import-card">
+      <h2>Bulk Import Expenses</h2>
+      <div
+        class="file-upload-container"
+        [class.drag-over]="isDragging"
+        (dragover)="onDragOver($event)"
+        (dragleave)="onDragLeave($event)"
+        (drop)="onDrop($event)"
+      >
+        <div class="upload-content">
+          <p>Drag & Drop your file here or</p>
+          <button (click)="fileInput.click()" class="btn btn-primary">Choose File</button>
+        </div>
+        <input
+          type="file"
+          accept=".csv"
+          #fileInput
+          (change)="onFileSelected($event)"
+          style="display: none"
+        />
+      </div>
+      <div *ngIf="selectedFile" class="selected-file">
+        Selected: {{ selectedFile.name }}
+      </div>
+      <div class="actions">
+        <button
+          (click)="uploadFile()"
+          [disabled]="!selectedFile || isUploading"
+          class="btn btn-primary"
+        >
+          {{ isUploading ? 'Uploading...' : 'Import' }}
+        </button>
+      </div>
+    </div>
+  </div>
