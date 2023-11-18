@@ -1,0 +1,139 @@
+<section class="background-radial-gradient overflow-hidden">
+    <div class="currency-container">
+        <span class="currency-symbol">$</span>
+        <span class="currency-symbol">€</span>
+        <span class="currency-symbol">£</span>
+        <span class="currency-symbol">¥</span>
+        <span class="currency-symbol">₹</span>
+        <span class="currency-symbol">$</span>
+        <span class="currency-symbol">€</span>
+        <span class="currency-symbol">£</span>
+        <span class="currency-symbol">¥</span>
+        <span class="currency-symbol">₹</span>
+        <span class="currency-symbol">$</span>
+        <span class="currency-symbol">€</span>
+        <span class="currency-symbol">£</span>
+        <span class="currency-symbol">¥</span>
+        <span class="currency-symbol">₹</span>
+        <span class="currency-symbol">$</span>
+        <span class="currency-symbol">€</span>
+    </div>
+
+    <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card bg-glass">
+                    <div class="card-body px-4 py-5">
+                        <h2 class="text-center text-white mb-5">Add Recurring Expense</h2>
+
+                        <form [formGroup]="recurringExpenseForm" (ngSubmit)="onSubmit()">
+                            <div class="form-outline mb-4">
+                                <div class="input-group">
+                                    <span class="input-group-text currency-selector">₹</span>
+                                    <input type="number"
+                                           formControlName="amount"
+                                           class="form-control custom-input"
+                                           [ngClass]="{'is-invalid': recurringExpenseForm.get('amount')?.errors && recurringExpenseForm.get('amount')?.touched}"
+                                           step="0.01"
+                                           min="0">
+                                </div>
+                                <div class="invalid-feedback" *ngIf="recurringExpenseForm.get('amount')?.touched" style="display: block;">
+                                    <span *ngIf="recurringExpenseForm.get('amount')?.errors?.['required']">Amount is required</span>
+                                    <span *ngIf="recurringExpenseForm.get('amount')?.errors?.['min']">Amount cannot be negative</span>
+                                    <span *ngIf="recurringExpenseForm.get('amount')?.errors?.['max']">Amount cannot be greater than  9999999999999999.99 </span>
+                                </div>
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                <select formControlName="frequency"
+                                        class="form-control custom-input"
+                                        [ngClass]="{'is-invalid': recurringExpenseForm.get('frequency')?.errors && recurringExpenseForm.get('frequency')?.touched}">
+                                    <option value="">Select Frequency</option>
+                                    <option value="Monthly Recurring">Monthly Recurring</option>
+                                    <option value="Yearly Recurring">Yearly Recurring</option>
+                                </select>
+                                <div class="invalid-feedback" *ngIf="recurringExpenseForm.get('frequency')?.touched">
+                                    Frequency is required
+                                </div>
+                            </div>
+
+                            <div class="form-outline mb-4" *ngIf="recurringExpenseForm.get('frequency')?.value === 'Monthly Recurring'">
+                                <label for="fromDate">From Date:</label>
+                                <input type="date"
+                                       formControlName="fromDate"
+                                       class="form-control custom-input"
+                                       [ngClass]="{'is-invalid': recurringExpenseForm.get('fromDate')?.errors && recurringExpenseForm.get('fromDate')?.touched}">
+                                <div class="invalid-feedback" *ngIf="recurringExpenseForm.get('fromDate')?.touched">
+                                    From Date is required
+                                </div>
+                            </div>
+
+                            <div class="form-outline mb-4" *ngIf="recurringExpenseForm.get('frequency')?.value === 'Monthly Recurring'">
+                                <label for="toDate">To Date:</label>
+                                <input type="date"
+                                       formControlName="toDate"
+                                       class="form-control custom-input"
+                                       [ngClass]="{'is-invalid': recurringExpenseForm.get('toDate')?.errors && recurringExpenseForm.get('toDate')?.touched}">
+                                <div class="invalid-feedback" *ngIf="recurringExpenseForm.get('toDate')?.touched">
+                                    To Date is required and must be after From Date and at least one month later
+                                </div>
+                            </div>
+
+                            <div class="form-outline mb-4" *ngIf="recurringExpenseForm.get('frequency')?.value === 'Yearly Recurring'">
+                                <label for="fromYear">From Year:</label>
+                                <select formControlName="fromYear" class="form-control custom-input"
+                                [ngClass]="{'is-invalid': recurringExpenseForm.get('fromYear')?.errors && recurringExpenseForm.get('fromYear')?.touched}">
+                            <option value="">Select From Year</option>
+                            <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+                        </select>
+                                <div class="invalid-feedback" *ngIf="recurringExpenseForm.get('fromYear')?.touched">
+                                    From Year is required
+                                </div>
+                            </div>
+
+                            <div class="form-outline mb-4" *ngIf="recurringExpenseForm.get('frequency')?.value === 'Yearly Recurring'">
+                                <label for="toYear">To Year:</label>
+                                <select formControlName="toYear" class="form-control custom-input"
+            [ngClass]="{'is-invalid': recurringExpenseForm.get('toYear')?.errors && recurringExpenseForm.get('toYear')?.touched}">
+        <option value="">Select To Year</option>
+        <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+    </select>
+
+                                <div class="invalid-feedback" *ngIf="recurringExpenseForm.get('toYear')?.touched">
+                                    To Year is required and must be at least one year later than From Year
+                                </div>
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                <select formControlName="categoryID"
+                                        class="form-control custom-input"
+                                        [ngClass]="{'is-invalid': recurringExpenseForm.get('categoryID')?.errors && recurringExpenseForm.get('categoryID')?.touched}">
+                                    <option value="">Select Category</option>
+                                    <option *ngFor="let category of categories" [value]="category.categoryID">
+                                        {{ category.name }}
+                                    </option>
+                                </select>
+                                <div class="invalid-feedback" *ngIf="recurringExpenseForm.get('categoryID')?.touched">
+                                    Category is required
+                                </div>
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                                  <label class="form-label text-light">Receipt (Optional)</label>
+                                <input type="file" (change)="onFileSelected($event)" class="form-control custom-input"/>
+                            </div>
+
+                            <button type="submit"
+                                    class="btn btn-primary btn-block"
+                                    [disabled]="recurringExpenseForm.invalid || isLoading">
+                                <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2"></span>
+                                Add Recurring Expense
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <app-view-recurring-expenses></app-view-recurring-expenses>
+</section>

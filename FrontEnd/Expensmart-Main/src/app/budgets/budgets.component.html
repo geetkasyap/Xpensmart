@@ -1,0 +1,98 @@
+<section class="background-radial-gradient overflow-hidden">
+  <div class="currency-container">
+    <span class="currency-symbol">$</span>
+    <span class="currency-symbol">€</span>
+    <span class="currency-symbol">£</span>
+    <span class="currency-symbol">¥</span>
+    <span class="currency-symbol">₹</span>
+    <span class="currency-symbol">€</span>
+    <span class="currency-symbol">£</span>
+    <span class="currency-symbol">¥</span>
+    <span class="currency-symbol">₹</span>
+    <span class="currency-symbol">$</span>
+    <span class="currency-symbol">€</span>
+    <span class="currency-symbol">£</span>
+    <span class="currency-symbol">¥</span>
+    <span class="currency-symbol">₹</span>
+    <span class="currency-symbol">$</span>
+    <span class="currency-symbol">€</span>
+    <span class="currency-symbol">£</span>
+  </div>
+<div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="card bg-glass">
+          <div class="card-body px-4 py-5">
+            <h2 class="text-center text-white mb-5">Add New Budget</h2>
+
+            <form [formGroup]="budgetForm" (ngSubmit)="onSubmit()">
+              <div class="form-outline mb-4">
+                <select formControlName="frequency" class="form-control custom-input" (change)="onFrequencyChange()">
+                  <option value="">Select Frequency</option>
+                  <option value="monthly">Monthly</option>
+                  <option value="yearly">Yearly</option>
+                </select>
+                <div class="invalid-feedback d-block" *ngIf="budgetForm.get('frequency')?.touched && budgetForm.get('frequency')?.errors?.['required']">
+                  Frequency is required
+                </div>
+              </div>
+
+              <div *ngIf="isMonthly">
+                <div class="form-outline mb-4">
+                  <select formControlName="month" class="form-control custom-input" (change)="setDates()">
+                    <option value="">Select Month</option>
+                    <option *ngFor="let month of months" [value]="month.value">{{ month.name }}</option>
+                  </select>
+                  <div class="invalid-feedback d-block" *ngIf="budgetForm.get('month')?.touched && budgetForm.get('month')?.errors?.['required']">
+                    Month is required
+                  </div>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <select formControlName="year" class="form-control custom-input" (change)="setDates()">
+                    <option value="">Select Year</option>
+                    <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+                  </select>
+                  <div class="invalid-feedback d-block" *ngIf="budgetForm.get('year')?.touched && budgetForm.get('year')?.errors?.['required']">
+                    Year is required
+                  </div>
+                </div>
+              </div>
+
+              <div *ngIf="isYearly">
+                <div class="form-outline mb-4">
+                  <select formControlName="year" class="form-control custom-input" (change)="setDates()">
+                    <option value="">Select Year</option>
+                    <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+                  </select>
+                  <div class="invalid-feedback d-block" *ngIf="budgetForm.get('year')?.touched && budgetForm.get('year')?.errors?.['required']">
+                    Year is required
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-outline mb-4">
+                <input type="number" formControlName="amount" class="form-control custom-input" placeholder="Amount in Ruppees" min="0">
+                <div class="invalid-feedback d-block" *ngIf="budgetForm.get('amount')?.touched && budgetForm.get('amount')?.errors?.['required']">
+                  Amount is required
+                </div>
+                <div class="invalid-feedback d-block" *ngIf="budgetForm.get('amount')?.touched && budgetForm.get('amount')?.errors?.['min']">
+                  Amount must be greater than 0
+                </div>
+                <div class="invalid-feedback d-block" *ngIf="budgetForm.get('amount')?.touched && budgetForm.get('amount')?.errors?.['max']">
+                  Amount cannot be greater than  9999999999999999.99 
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-block" [disabled]="!isFormValid() || isLoading">
+                <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2"></span>
+                Add Budget
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-budgets-table></app-budgets-table>
+</section>
