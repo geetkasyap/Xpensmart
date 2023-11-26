@@ -1,0 +1,62 @@
+  <section class="background-radial-gradient">
+    <div *ngIf="isLoading" class="loading-indicator">Loading...</div>
+     <div *ngIf="!isLoading">
+    <div class="currency-container">
+      <span class="currency-symbol">$</span>
+      <span class="currency-symbol">€</span>
+      <span class="currency-symbol">£</span>
+      <span class="currency-symbol">₹</span>
+      <span class="currency-symbol">¥</span>
+      <span class="currency-symbol">₹</span>
+      <span class="currency-symbol">€</span>
+      <span class="currency-symbol">£</span>
+      <span class="currency-symbol">¥</span>
+      <span class="currency-symbol">₹</span>
+      <span class="currency-symbol">$</span>
+      <span class="currency-symbol">€</span>
+      <span class="currency-symbol">£</span>
+      <span class="currency-symbol">¥</span>
+      <span class="currency-symbol">₹</span>
+      <span class="currency-symbol">$</span>
+      <span class="currency-symbol">€</span>
+      <span class="currency-symbol">£</span>
+      <span class="currency-symbol">₹</span>  
+    </div>
+    <div class="space"></div>
+    <app-recent-expenses></app-recent-expenses>
+    <app-dash-board-chart></app-dash-board-chart>
+
+    <div class="timeline-container bg-glass">
+      <div class="month-navigation">
+        <button (click)="navigateMonth(-1)">Previous Month</button>
+        <h2>{{ currentMonth | date:'MMMM yyyy' }}</h2>
+        <button (click)="navigateMonth(1)">Next Month</button>
+      </div>
+  
+      <div class="horizontal-timeline">
+        <div class="weeks-container">
+          <ng-container *ngFor="let week of weeks">
+            <div class="week-marker" 
+                 [class.active]="selectedWeek === week"
+                 (click)="selectWeek(week)"
+                 [@slideIn]>
+              <div class="marker"></div>
+              <span>Week {{ week.number }}</span>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+  
+      <div class="vertical-timeline" *ngIf="selectedWeek" [@expandVertical]>
+        <h3>Expenses for Week {{ selectedWeek.number }}</h3>
+        <div class="expense-item" *ngFor="let expense of weeklyExpenses" [@slideIn]>
+          <div class="expense-date">{{ formatDate(expense.date) }}</div>
+          <div class="expense-amount">{{ formatAmount(expense.amount) }}</div>
+          <div class="expense-description">{{ expense.description }}</div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  

@@ -1,0 +1,288 @@
+
+@use "sass:math";
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
+
+$bg-primary: #1a1a1a;
+$bg-secondary: #2d2d2d;
+$text-primary: #ffffff;
+$text-secondary: #b3b3b3;
+$accent-primary: #6C63FF;
+$accent-secondary: #44006b;
+$error-color: #ff4d4d;
+$input-bg: rgba(45, 45, 45, 0.9);
+$card-bg: rgba(45, 45, 45, 0.8);
+$primary-color: #6C63FF;
+$background-dark: #1a1a1a;
+$card-background: #2d2d2d;
+$text-primary: #ffffff;
+$text-secondary: #b3b3b3;
+$error-color: #ff4d4d;
+$success-color: #4CAF50;
+
+.background-radial-gradient {
+  background-color: $bg-primary;
+  background-image: radial-gradient(
+    650px circle at 0% 0%,
+    rgba(108, 99, 255, 0.15) 15%,
+    rgba(108, 99, 255, 0.1) 35%,
+    rgba(26, 26, 26, 0.9) 75%,
+    rgba(26, 26, 26, 1) 80%,
+    transparent 100%
+  );
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+.currency-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.currency-symbol {
+  position: absolute;
+  color: rgba($accent-primary, 0.2);
+  font-size: 2rem;
+  font-weight: bold;
+  animation: float-currency 15s linear infinite;
+  
+  @for $i from 1 through 15 {
+    &:nth-child(#{$i}) {
+      left: #{math.random() * 100}vw;
+      top: -30px;
+      animation-delay: #{math.random() * 15}s;
+      animation-duration: #{10 + math.random() * 20}s;
+      font-size: #{1.5 + math.random() * 2}rem;
+      opacity: #{0.1 + math.random() * 0.3};
+    }
+  }
+}
+
+@keyframes float-currency {
+  0% {
+    transform: translateY(-30px) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+.dashboard-container {
+  padding: 2rem;
+  color: $text-primary;
+}
+
+.month-selector {
+  margin-bottom: 2rem;
+  
+  select {
+    background: $card-bg;
+    color: $text-primary;
+    padding: 0.5rem 1rem;
+    border: 1px solid $accent-primary;
+    border-radius: 8px;
+    font-size: 1rem;
+    
+    option {
+      background: $bg-secondary;
+    }
+  }
+}
+
+.top-section {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+  
+  .budget-meter {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    
+    .budget-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      
+      h3 {
+        color: $text-primary;
+        margin-bottom: 0.5rem;
+      }
+      
+      p {
+        color: $accent-primary;
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  
+  .category-box {
+    background: $card-bg;
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    transition: transform 0.5s ease-in-out;
+    transform-style: preserve-3d;
+    border: 1px solid rgba($accent-primary, 0.1);
+    
+    &:hover {
+      border-color: $accent-primary;
+      box-shadow: 0 0 15px rgba($accent-primary, 0.2);
+      animation: cardGlow 1.5s ease-in-out infinite;
+      transform: translateY(-5px);
+    }
+  }
+}
+
+.bottom-section {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  
+  .polar-chart {
+    background: $card-bg;
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    transition: transform 0.5s ease-in-out;
+    transform-style: preserve-3d;
+    border: 1px solid rgba($accent-primary, 0.1);
+    
+    &:hover {
+      border-color: $accent-primary;
+      box-shadow: 0 0 15px rgba($accent-primary, 0.2);
+      animation: cardGlow 1.5s ease-in-out infinite;
+      transform: translateY(-5px);
+    }
+  }
+}
+.timescale-chart
+{
+  background: $card-bg;
+    border-radius: 12px;
+    height: 500px;
+    width: 783px;
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    transition: transform 0.5s ease-in-out;
+    transform-style: preserve-3d;
+    border: 1px solid rgba($accent-primary, 0.1);
+    position: relative;
+    canvas
+    {
+      width: 750px !important;
+      height: 450px !important;
+    }
+    
+    &:hover {
+      border-color: $accent-primary;
+      box-shadow: 0 0 15px rgba($accent-primary, 0.2);
+      animation: cardGlow 1.5s ease-in-out infinite;
+      transform: translateY(-5px);
+    }
+}
+
+.daily-expenses {
+  background: $card-bg;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+    transition: transform 0.5s ease-in-out;
+    transform-style: preserve-3d;
+    border: 1px solid rgba($accent-primary, 0.1);
+    display: block;
+    box-sizing: border-box;
+    touch-action: auto;
+    user-select: none;
+    -webkit-user-drag: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    height: 400px;
+    width: 800px;
+    position: relative;
+    
+    &:hover {
+      border-color: $accent-primary;
+      box-shadow: 0 0 15px rgba($accent-primary, 0.2);
+      animation: cardGlow 1.5s ease-in-out infinite;
+      transform: translateY(-5px);
+    }
+}
+.lower-bottom-section
+{
+  display: flex;
+  justify-content: center;
+}
+
+.chart-container {
+  display: block;
+box-sizing: border-box;
+height: 400px;
+width: 782px;
+}
+.polar-chart
+{
+  display: block;
+  box-sizing: border-box;
+  height: 500px;
+  width: 600px;
+}
+.PDFbtn
+{
+  display: flex;
+  justify-content: center;
+}
+
+section {
+  margin-left: 70px;
+}
+#report-content {
+  background-color: #2d2d2d;
+  background: #2d2d2d;
+}
+
+@keyframes cardGlow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba($accent-primary, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba($accent-primary, 0.4);
+  }
+}
+
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+

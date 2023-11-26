@@ -1,0 +1,33 @@
+<section class="background-radial-gradient overflow-hidden">
+  <div class="currency-container">
+    <span class="currency-symbol">$</span>
+    <span class="currency-symbol">€</span>
+    <span class="currency-symbol">£</span>
+    <span class="currency-symbol">¥</span>
+    <span class="currency-symbol">₹</span>
+ 
+    <span class="currency-symbol">$</span>
+    <span class="currency-symbol">€</span>
+    <span class="currency-symbol">£</span>
+    <span class="currency-symbol">¥</span>
+    <span class="currency-symbol">₹</span>
+    <span class="currency-symbol">$</span>
+    <span class="currency-symbol">€</span>
+    <span class="currency-symbol">£</span>
+    <span class="currency-symbol">¥</span>
+    <span class="currency-symbol">₹</span>
+    <span class="currency-symbol">$</span>
+    <span class="currency-symbol">€</span>
+  </div>
+
+  <div class="container">
+    <h2>Expense Projection</h2>
+    <div class="form">
+      <label for="income">Enter Monthly Income:</label>
+      <input type="number" id="income" [(ngModel)]="income" class="form-control custom-input" min="0" max="9999999999999999999999999999" required />
+      <button (click)="projectExpenses()" class="btn">Show Projection</button>
+    </div>
+  </div>
+
+    <canvas id="expenseProjectionChart"></canvas>
+  </section>

@@ -1,0 +1,201 @@
+@use "sass:math";
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
+
+$bg-primary: #1a1a1a;
+$bg-secondary: #2d2d2d;
+$text-primary: #ffffff;
+$text-secondary: #b3b3b3;
+$accent-primary: #6C63FF;
+$accent-secondary: #44006b;
+$error-color: #ff4d4d;
+$input-bg: rgba(45, 45, 45, 0.9);
+$card-bg: rgba(45, 45, 45, 0.8);
+$primary-color: #6C63FF;
+$background-dark: #1a1a1a;
+$card-background: #2d2d2d;
+$text-primary: #ffffff;
+$text-secondary: #b3b3b3;
+$error-color: #ff4d4d;
+$success-color: #4CAF50;
+
+.background-radial-gradient {
+  background-color: $bg-primary;
+  background-image: radial-gradient(
+    650px circle at 0% 0%,
+    rgba(108, 99, 255, 0.15) 15%,
+    rgba(108, 99, 255, 0.1) 35%,
+    rgba(26, 26, 26, 0.9) 75%,
+    rgba(26, 26, 26, 1) 80%,
+    transparent 100%
+  );
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+.currency-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.currency-symbol {
+  position: absolute;
+  color: rgba($accent-primary, 0.2);
+  font-size: 2rem;
+  font-weight: bold;
+  animation: float-currency 15s linear infinite;
+  
+  @for $i from 1 through 15 {
+    &:nth-child(#{$i}) {
+      left: #{math.random() * 100}vw;
+      top: -30px;
+      animation-delay: #{math.random() * 15}s;
+      animation-duration: #{10 + math.random() * 20}s;
+      font-size: #{1.5 + math.random() * 2}rem;
+      opacity: #{0.1 + math.random() * 0.3};
+    }
+  }
+}
+
+@keyframes float-currency {
+  0% {
+    transform: translateY(-30px) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.timeline-container {
+  padding: 2rem;
+  color: $text-primary;
+}
+
+.horizontal-timeline {
+  position: relative;
+  padding: 2rem 0;
+  
+  &::before {
+    content: '';
+    position:absolute;
+    left: 210px;
+    right: 240px;
+    top: 40%;
+    height: 2px;
+    background: $accent-primary;
+    transform: translateY(-50%);
+  }
+}
+
+.month-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+
+  
+  button {
+    background: $accent-primary;
+    border: none;
+    padding: 0.5rem 1rem;
+    color: $text-primary;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    
+    &:hover {
+      background: $accent-secondary;
+    }
+  }
+}
+
+.weeks-container {
+  display: flex;
+  justify-content:space-evenly;
+  position: relative;
+}
+
+.week-marker {
+  position: relative;
+  cursor: pointer;
+  
+  .marker {
+    width: 20px;
+    height: 20px;
+    background: $accent-primary;
+    border-radius: 50%;
+    position: relative;
+    z-index: 2;
+    transition: transform 0.3s ease, background 0.3s ease;
+    
+    &:hover {
+      transform: scale(1.2);
+      background: $accent-secondary;
+    }
+  }
+  
+  &.active .marker {
+    background: $accent-secondary;
+    transform: scale(1.2);
+  }
+}
+
+.vertical-timeline {
+  margin-top: 2rem;
+  padding: 1rem;
+  background: $card-bg;
+  border-radius: 8px;
+  
+  .expense-item {
+    padding: 1rem;
+    margin: 0.5rem 0;
+    background: $input-bg;
+    border-radius: 4px;
+    transition: transform 0.3s ease;
+    
+    &:hover {
+      transform: translateX(10px);
+    }
+    
+    .expense-date {
+      color: $accent-primary;
+      font-weight: bold;
+    }
+    
+    .expense-amount {
+      color: $text-secondary;
+    }
+  }
+}
+.space
+{
+  padding: 40px 0px 0px 0px;
+}
+
+section {
+  margin-left: 70px;
+}
+.loading-indicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  color: $accent-secondary;
+  z-index: 1000;
+}
+
+
+
+

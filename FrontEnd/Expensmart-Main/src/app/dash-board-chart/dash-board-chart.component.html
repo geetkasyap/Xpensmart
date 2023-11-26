@@ -1,0 +1,22 @@
+<div *ngIf="isLoading" class="loading-indicator">Loading...</div>
+<div *ngIf="!isLoading">
+<div class="expense-graph-container">
+    <div class="graph-header">
+      <h2>Expenses by Category</h2>
+      <div class="month-select-container">
+        <label for="monthSelect">Select Month</label>
+        <select id="monthSelect" [(ngModel)]="selectedMonth" (change)="onMonthChange($event)">
+          <option *ngFor="let month of months; let i = index" [value]="i">
+            {{ month }}
+          </option>
+        </select>
+      </div>
+    </div>
+  
+  <div class="chart-container">
+    <canvas #expenseCanvas></canvas>
+    <div *ngIf="!hasData" class="no-data-message">No Previous Data</div>
+  </div>
+</div>
+
+  

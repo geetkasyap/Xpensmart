@@ -1,0 +1,83 @@
+<div id="report-content">
+<section class="background-radial-gradient overflow-hidden">
+    <div class="currency-container">
+      <span class="currency-symbol">$</span>
+      <span class="currency-symbol">€</span>
+      <span class="currency-symbol">£</span>
+      <span class="currency-symbol">¥</span>
+      <span class="currency-symbol">₹</span>
+      <span class="currency-symbol">$</span>
+      <span class="currency-symbol">€</span>
+      <span class="currency-symbol">£</span>
+      <span class="currency-symbol">¥</span>
+      <span class="currency-symbol">₹</span>
+      <span class="currency-symbol">$</span>
+      <span class="currency-symbol">€</span>
+      <span class="currency-symbol">£</span>
+      <span class="currency-symbol">¥</span>
+      <span class="currency-symbol">₹</span>
+      <span class="currency-symbol">$</span>
+      <span class="currency-symbol">€</span>
+    </div>
+
+
+
+       <div class="dashboard-container">
+         <div class="month-selector">
+           <select [(ngModel)]="selectedMonth" (change)="onMonthChange()">
+             <option *ngFor="let month of monthsList" [value]="month">
+               {{month | date:'MMMM yyyy'}}
+             </option>
+           </select>
+         </div>
+    
+
+         <div class="top-section">
+           <div class="budget-meter">
+             <canvas id="radialChart"></canvas>
+             <div class="budget-text">
+               <h3>Monthly Budget</h3>
+               <p>{{totalExpenses | currency:'INR'}} / {{monthlyBudget | currency:'INR'}}</p>
+              </div>
+           </div>
+         </div>
+    
+
+         <div class="category-grid">
+          <div class="category-box" *ngFor="let i of [1,2,3,4]">
+              <canvas [id]="'categoryChart' + i"></canvas>
+          </div>
+      </div>
+      <div class="category-grid">
+          <div class="category-box" *ngFor="let i of [5,6,7,8]">
+              <canvas [id]="'categoryChart' + i"></canvas>
+          </div>
+      </div>
+      <div class="category-grid">
+        <div class="category-box" *ngFor="let i of [9,10,11,12]">
+            <canvas [id]="'categoryChart' + i"></canvas>
+        </div>
+    </div>
+    
+
+         <div class="bottom-section">
+           <div class="polar-chart">
+             <canvas id="polarChart"></canvas>
+           </div>
+          
+
+           <div class="timescale-chart">
+            <canvas id="timeScaleChart"></canvas>
+          </div>
+         </div>
+    
+         <div class="lower-bottom-section">
+         <div class="daily-expenses">
+           <canvas id="dailyExpenseChart"></canvas>
+         </div>
+        </div>
+       </div>
+<div class="PDFbtn">
+       <button class="btn btn-primary" (click)="exportAsPDF()">Export as PDF</button></div>
+</section>
+</div>
