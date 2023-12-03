@@ -1,0 +1,183 @@
+@use "sass:math";
+$bg-primary: #1a1a1a;
+$bg-secondary: #2d2d2d;
+
+$text-primary: #dadada;
+$text-secondary: #dfdfdf;
+$accent-primary: #6C63FF;
+$accent-secondary: #44006b;
+$error-color: #ff4d4d;
+$input-bg: rgba(45, 45, 45, 0.9);
+$card-bg: rgba(45, 45, 45, 0.8);
+
+.example-form-fields {
+    display: flex;
+    align-items: flex-start;
+    height: 100%;
+  }
+  .example-container
+  {
+    display: flex; justify-content: center; align-items: center; 
+  }
+.example-button-row
+{
+  display: flex; justify-content: center; align-items: center; 
+}
+
+
+
+
+
+
+.custom-input {
+  background-color: $input-bg;
+  border: 1px solid rgba($accent-primary, 0.1);
+  color: $text-primary;
+  transition: all 0.3s ease;
+  
+  &:focus {
+    background-color: rgba($input-bg, 0.95);
+    border-color: $accent-primary;
+    box-shadow: 0 0 15px rgba($accent-primary, 0.2);
+    animation: glow 1.5s ease-in-out infinite alternate;
+  }
+  
+  &.is-invalid {
+    border-color: $error-color;
+    animation: error-glow 1.5s ease-in-out infinite alternate;
+  }
+}
+
+.currency-selector {
+  background-color: $input-bg;
+  border: 1px solid rgba($accent-primary, 0.1);
+  color: $text-primary;
+  min-width: 60px;
+  
+  &:hover, &:focus {
+    background-color: rgba($accent-primary, 0.1);
+    border-color: $accent-primary;
+    color: $accent-primary;
+  }
+}
+
+.dropdown-menu {
+  background-color: $bg-secondary;
+  border: 1px solid rgba($accent-primary, 0.1);
+  
+  .dropdown-item {
+    color: $text-primary;
+    
+    &:hover {
+      background-color: rgba($accent-primary, 0.1);
+      color: $accent-primary;
+    }
+  }
+}
+
+.char-count {
+  color: $text-secondary;
+  font-size: 0.8rem;
+  text-align: right;
+  margin-top: 0.25rem;
+  
+  &.text-danger {
+    color: $error-color;
+  }
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 5px rgba($accent-primary, 0.2),
+                0 0 10px rgba($accent-primary, 0.2),
+                0 0 15px rgba($accent-primary, 0.2);
+  }
+  to {
+    box-shadow: 0 0 10px rgba($accent-primary, 0.3),
+                0 0 20px rgba($accent-primary, 0.3),
+                0 0 30px rgba($accent-primary, 0.3);
+  }
+}
+
+@keyframes error-glow {
+  from {
+    box-shadow: 0 0 5px rgba($error-color, 0.2),
+                0 0 10px rgba($error-color, 0.2),
+                0 0 15px rgba($error-color, 0.2);
+  }
+  to {
+    box-shadow: 0 0 10px rgba($error-color, 0.3),
+                0 0 20px rgba($error-color, 0.3),
+                0 0 30px rgba($error-color, 0.3);
+  }
+}
+
+input[type="date"] {
+  &::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    opacity: 0.5;
+    cursor: pointer;
+    
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23b3b3b3' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1em;
+}
+.card{
+  background-color: transparent;
+}
+
+.form-outline mb-4
+{
+color: #dadada;
+}
+
+.custom-input[type="file"] {
+  background-color: $input-bg; 
+  border: 1px solid rgba($accent-primary, 0.1);
+  color: $text-primary;
+  padding: 10px;
+  transition: all 0.3s ease;
+
+  &:focus {
+    background-color: rgba($input-bg, 0.95);
+    border-color: $accent-primary;
+    box-shadow: 0 0 15px rgba($accent-primary, 0.2);
+  }
+
+  &::-webkit-file-upload-button {
+    visibility: hidden;
+  }
+
+  &::before {
+    content: 'Choose File'; 
+    display: inline-block;
+    background: $accent-primary;
+    color: $text-primary;
+    padding: 10px 15px;
+    border-radius: 12px;
+    cursor: pointer; 
+  }
+
+  &:hover::before {
+    background: darken-color($accent-primary, 10%);
+  }
+
+  @function darken-color($color,$percentage)
+  {
+  @return color-mix(rgb(0, 0, 0),$color,$percentage);
+  }
+}
+::placeholder
+{
+  color:white;
+  opacity: 0.1; 
+}

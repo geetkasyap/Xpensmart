@@ -1,0 +1,205 @@
+<section class="background-radial-gradient overflow-hidden">
+  <div class="currency-container">
+    <span class="currency-symbol">$</span>
+    <span class="currency-symbol">€</span>
+    <span class="currency-symbol">£</span>
+    <span class="currency-symbol">¥</span>
+    <span class="currency-symbol">₹</span>
+    <span class="currency-symbol">$</span>
+    <span class="currency-symbol">€</span>
+    <span class="currency-symbol">£</span>
+    <span class="currency-symbol">¥</span>
+    <span class="currency-symbol">₹</span>
+    <span class="currency-symbol">$</span>
+    <span class="currency-symbol">€</span>
+    <span class="currency-symbol">£</span>
+    <span class="currency-symbol">¥</span>
+    <span class="currency-symbol">₹</span>
+    <span class="currency-symbol">$</span>
+    <span class="currency-symbol">€</span>
+  </div>
+
+  <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h2 class="text-white mb-0">Your Groups</h2>
+          <button class="btn btn-primary" (click)="navigateToGroupCreation()">+</button>
+        </div>
+        <div class="d-flex flex-wrap">
+          <div *ngFor="let group of groups" class="group-bubble mx-2 mb-2" (click)="openGroup(group)" (mouseover)="hoveredGroup = group" (mouseout)="hoveredGroup = null">
+            <div class="bubble-content">
+              {{ group.groupName.charAt(0).toUpperCase() }}
+              <div *ngIf="hoveredGroup === group" class="bubble-tooltip">{{ group.groupName }}</div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="selectedGroup" class="mt-4" > 
+          <h3 class="text-white mb-3">Group: {{ selectedGroup.groupName }}</h3>
+          <div class="d-flex flex-column">
+            <div *ngFor="let expense of expenses" class="expense-card mb-3" [ngClass]="{'my-expense': expense.userID === locUserID, 'other-expense': expense.userID !== locUserID}">
+              <div class="expense-header">
+                <span>{{ expense.userName }}</span>
+                <span>{{ expense.date | date:'mediumDate' }}</span>
+              </div>
+              <div class="expense-details">
+                <span>Amount: {{ expense.amount | currency:'INR' }}</span>
+              <br>
+                <span>Description: {{ expense.description }}</span>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-primary mt-4" (click)="openAddExpenseModal()">Add Expense</button>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="showAddExpenseModal" class="modal fade show d-block" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content bg-glass">
+        <div class="modal-header">
+          <button type="button" class="btn-close" aria-label="Close" (click)="closeAddExpenseModal()"></button>
+        </div>
+        <div class="modal-body">
+          <app-add-group-expense 
+    (expenseAdded)="onExpenseAdded()"
+    [groupID]="selectedGroup?.groupID">
+</app-add-group-expense>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="background-radial-gradient-reconciliation"[ngClass]="{'Nonecard' : selectedGroup==null}">
+  <div class="card">
+      <div *ngIf="selectedGroup">
+        <div class="card-body">
+        <h4>Group: {{ selectedGroup.groupName }}</h4>
+        <button class="btn btn-primary" (click)="openReconciliationForm()" [ngClass]="{'NoneButton' : showReconciliationForm}" >Add Reconciliation Expense</button>
+        <button *ngIf="selectedGroup" class="btn btn-primary ms-2" (click)="openSettleExpenses()">
+          Settle Expenses
+        </button>
+        <button class="btn btn-danger ms-2" (click)="deleteGroup(selectedGroup.groupID)" [disabled]="!selectedGroup">
+          Delete Group
+        </button>
+        <div *ngIf="showReconciliationForm">
+          <h5>Add Reconciliation Expense</h5>
+          <form [formGroup]="reconciliationForm" (ngSubmit)="onSubmit()">
+
+            <div class="form-group">
+              <label>Total Amount</label>
+              <input type="number" class="form-control custom-input" formControlName="totalAmount" placeholder="Enter total amount" />
+              <div *ngIf="reconciliationForm.get('totalAmount')?.invalid && reconciliationForm.get('totalAmount')?.touched" class="text-danger">
+                Total amount is required and must be greater than 0.
+              </div>
+            </div>
+
+
+            <div class="form-group">
+              <label>Date</label>
+              <input type="date" class="form-control custom-input" formControlName="date" />
+              <div *ngIf="reconciliationForm.get('date')?.invalid && reconciliationForm.get('date')?.touched" class="text-danger">
+                Date is required.
+              </div>
+            </div>
+
+
+            <div class="form-group">
+              <label>Select Category</label>
+              <select class="form-control custom-input" formControlName="categoryID">
+                <option *ngFor="let category of categories" [value]="category.categoryID">{{ category.name }}</option>
+              </select>
+              <div *ngIf="reconciliationForm.get('categoryID')?.invalid && reconciliationForm.get('categoryID')?.touched" class="text-danger">
+                Category is required.
+              </div>
+            </div>
+
+
+            <div class="form-group">
+              <label>Upload Receipt</label>
+              <input type="file" class="form-control custom-input" (change)="onOneFileSelected($event)" />
+            </div>
+
+            <div formArrayName="userExpenses" *ngFor="let user of groupUsers; let i = index" class="form-group">
+              <label>{{ user.userName }} Amount</label>
+              <input type="number" class="form-control custom-input" [formControlName]="i" (input)="validateTotal()" />
+              <div *ngIf="userExpenses.at(i)?.invalid && userExpenses.at(i)?.touched" class="text-danger">
+                  Amount is required and must be greater than 0.
+              </div>
+            </div>
+
+
+            <button type="submit" class="btn btn-primary" [disabled]="reconciliationForm.invalid || totalMismatch">Add Reconciliation Expense</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div *ngIf="showSettleExpensesModal" class="modal fade show d-block" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+    <div class="modal-content bg-glass">
+      <div class="modal-header">
+        <h4 class="modal-title text-white">Settle Expenses - {{ selectedGroup?.groupName }}</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="showSettleExpensesModal = false"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="settleExpensesForm">
+          <div formArrayName="users">
+            <div *ngFor="let userGroup of settleExpensesUserControls.controls; let userIndex = index" 
+                 [formGroupName]="userIndex" class="card mb-4 bg-dark">
+              <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="text-white">
+                  {{ userGroup.get('userName')?.value }} 
+                  <span class="badge bg-primary ms-2">
+                    Total Owed: ₹{{ userGroup.get('totalOwed')?.value | number:'1.2-2' }}
+                  </span>
+                </h5>
+                <button class="btn btn-sm btn-outline-primary" (click)="addUserExpense(userIndex)">
+                  <i class="fas fa-plus"></i> Add Expense
+                </button>
+              </div>
+              <div class="card-body" formArrayName="expenses">
+                <div *ngFor="let expenseControl of getUserExpensesControls(userGroup); let expenseIndex = index" 
+                     [formGroupName]="expenseIndex" class="row mb-3">
+                  <div class="col-md-3">
+                    <label class="form-label text-white">Amount</label>
+                    <input type="number" class="form-control custom-input" formControlName="amount" placeholder="Enter amount">
+                  </div>
+                  <div class="col-md-3">
+                    <label class="form-label text-white">Description</label>
+                    <input type="text" class="form-control custom-input" formControlName="description" placeholder="Expense description">
+                  </div>
+                  <div class="col-md-3">
+                    <label class="form-label text-white">Category</label>
+                    <select class="form-control custom-input" formControlName="categoryID">
+                      <option *ngFor="let category of categories" [value]="category.categoryID">
+                        {{ category.name }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="col-md-3">
+                    <label class="form-label text-white">Receipt</label>
+                    <input type="file" class="form-control custom-input" 
+                           (change)="onFileSelected(userIndex, expenseIndex, $event)">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="showSettleExpensesModal = false">Cancel</button>
+        <button class="btn btn-primary" (click)="settleExpenses()" 
+                [disabled]="settleExpensesForm.invalid">
+          Settle Expenses
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</section>
+

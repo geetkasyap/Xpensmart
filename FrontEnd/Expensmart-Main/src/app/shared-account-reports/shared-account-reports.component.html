@@ -1,0 +1,101 @@
+<div id="report-content">
+    <section class="background-radial-gradient overflow-hidden">
+        <div class="currency-container">
+          <span class="currency-symbol">$</span>
+          <span class="currency-symbol">€</span>
+          <span class="currency-symbol">£</span>
+          <span class="currency-symbol">¥</span>
+          <span class="currency-symbol">₹</span>
+          <span class="currency-symbol">$</span>
+          <span class="currency-symbol">€</span>
+          <span class="currency-symbol">£</span>
+          <span class="currency-symbol">¥</span>
+          <span class="currency-symbol">₹</span>
+          <span class="currency-symbol">$</span>
+          <span class="currency-symbol">€</span>
+          <span class="currency-symbol">£</span>
+          <span class="currency-symbol">¥</span>
+          <span class="currency-symbol">₹</span>
+          <span class="currency-symbol">$</span>
+          <span class="currency-symbol">€</span>
+        </div>
+    <div class="shared-expenses-container">
+
+      <div class="user-selection">
+        <span style="color: white; background-color: transparent; font-size: 1.5em; font-weight: bolder" >Select Your Shared User : </span>
+          <select [(ngModel)]="selectedUser2" (change)="onUser2Change()">
+            <option value="" disabled selected>--select your shared user--</option>
+              <option *ngFor="let user of users" [value]="user.userID">{{user.userName}}</option>
+          </select>
+      </div>
+
+      <div class="split-screen">
+          <div class="report-side">
+              <h2 style="color: white;">Your Expenses</h2>
+              <div class="month-selector">
+                  <select [(ngModel)]="selectedMonth" (change)="onMonthChange()">
+                      <option *ngFor="let month of monthsList" [value]="month">
+                          {{month | date:'MMMM yyyy'}}
+                      </option>
+                  </select>
+              </div>
+              <div id="report-content-user1" class="report-content">
+                  <div class="top-section">
+                      <div class="budget-meter">
+                          <canvas id="radialChart1"></canvas>
+                          <div class="budget-text">
+                              <h3>Monthly Budget</h3>
+                              <p>{{user1Expenses | currency:'INR'}} / {{user1Budget | currency:'INR'}}</p>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="charts-grid">
+                      <div class="chart-container">
+                          <canvas id="timeScaleChart1"></canvas>
+                      </div>
+                      <div class="chart-container">
+                          <canvas id="polarChart1"></canvas>
+                      </div>
+                      <div class="daily-expenses">
+                          <canvas id="dailyExpenseChart1"></canvas>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <div class="report-side" *ngIf="selectedUser2" [@slideInOut]>
+              <h2 style="color: white;">Shared User's Expenses</h2>
+              <div class="month-selector">
+                  <select [(ngModel)]="selectedMonth" (change)="onMonthChange()">
+                      <option *ngFor="let month of monthsList" [value]="month">
+                          {{month | date:'MMMM yyyy'}}
+                      </option>
+                  </select>
+              </div>
+              <div id="report-content-user2" class="report-content">
+                  <div class="top-section">
+                      <div class="budget-meter">
+                          <canvas id="radialChart2"></canvas>
+                          <div class="budget-text">
+                              <h3>Monthly Budget</h3>
+                              <p>{{user2Expenses | currency:'INR'}} / {{user2Budget | currency:'INR'}}</p>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="charts-grid">
+                      <div class="chart-container">
+                          <canvas id="timeScaleChart2"></canvas>
+                      </div>
+                      <div class="chart-container">
+                          <canvas id="polarChart2"></canvas>
+                      </div>
+                      <div class="daily-expenses">
+                          <canvas id="dailyExpenseChart2"></canvas>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+</div>

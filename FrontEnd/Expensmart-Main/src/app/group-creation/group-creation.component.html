@@ -1,0 +1,90 @@
+<section class="background-radial-gradient">
+  <div class="currency-container">
+    <span class="currency-symbol">$</span>
+    <span class="currency-symbol">€</span>
+    <span class="currency-symbol">£</span>
+    <span class="currency-symbol">₹</span>
+    <span class="currency-symbol">¥</span>
+    <span class="currency-symbol">₹</span>
+    <span class="currency-symbol">€</span>
+    <span class="currency-symbol">£</span>
+    <span class="currency-symbol">¥</span>
+    <span class="currency-symbol">₹</span>
+    <span class="currency-symbol">$</span>
+    <span class="currency-symbol">€</span>
+    <span class="currency-symbol">£</span>
+    <span class="currency-symbol">¥</span>
+    <span class="currency-symbol">₹</span>
+    <span class="currency-symbol">$</span>
+    <span class="currency-symbol">€</span>
+    <span class="currency-symbol">£</span>
+    <span class="currency-symbol">₹</span>  
+  </div>
+
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+          <div class="card-body p-4">
+            <h2 class="text-center mb-4 text-light">Create Group</h2>
+
+            <form (ngSubmit)="createGroup()" #groupForm="ngForm" class="animate__animated animate__fadeIn">
+              <div class="mb-3">
+                <label class="form-label text-light">Group Name</label>
+                <input type="text" 
+                       class="form-control custom-input" 
+                       [(ngModel)]="groupName" 
+                       name="groupName" 
+                       required 
+                       maxlength="255"
+                       [ngClass]="{'is-invalid': groupForm.controls['groupName'] && groupForm.controls['groupName'].invalid && groupForm.controls['groupName'].touched}">
+                <div class="invalid-feedback" *ngIf="groupForm.controls['groupName'] && groupForm.controls['groupName'].errors?.['required']">
+                  Group name is required
+                </div>
+                <div class="invalid-feedback" *ngIf="groupForm.controls['groupName'] && groupForm.controls['groupName'].errors?.['maxlength']">
+                  Group name length cannot exceed limit 255 characters
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label text-light">Select Users</label>
+                <input type="text" 
+                       class="form-control custom-input" 
+                       [(ngModel)]="userSearch" 
+                       name="userSearch" 
+                       (input)="filterUsers(userSearch)" 
+                       placeholder="Type to search users">
+                <div class="dropdown-menu show" *ngIf="filteredUsers.length > 0">
+                  <button type="button" 
+                          class="dropdown-item" 
+                          *ngFor="let user of filteredUsers" 
+                          (click)="selectUser (user)">
+                    {{ user.fullName }}
+                  </button>
+                </div>
+
+                <div class="mt-2">
+                  <span class="badge bg-primary me-2 mb-2" 
+                        *ngFor="let user of selectedUsers; let i = index">
+                    {{ user.fullName }}
+                    <button type="button" class="btn-close btn-close-white ms-2" 
+                            (click)="removeUser (i)"></button>
+                  </span>
+                </div>
+              </div>
+
+              <div class="d-grid">
+                <button type="submit" 
+                        class="btn btn-primary" 
+                        [disabled]="groupForm.invalid || selectedUsers.length === 0">
+                  Create Group
+                </button>
+              </div>
+            </form>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center mt-4 buttons">
+    <button type="button" class="btn btn-secondary me-2" (click)="ViewGroups()">View Groups</button>
+  </div>
+</section>

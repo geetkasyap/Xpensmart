@@ -1,0 +1,265 @@
+@use "sass:math";
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
+
+$bg-primary: #1a1a1a;
+$bg-secondary: #2d2d2d;
+$text-primary: #ffffff;
+$text-secondary: #b3b3b3;
+$accent-primary: #6C63FF;
+$accent-secondary: #44006b;
+$error-color: #ff4d4d;
+$input-bg: rgba(45, 45, 45, 0.9);
+$card-bg: rgba(45, 45, 45, 0.8);
+
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+
+.search-filter-container {
+  margin-bottom: 2rem;
+  
+  :hover
+  {
+    color: rgba(255, 255, 255, 0.363);
+  }
+
+  .search-field {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .filter-tags {
+    margin-bottom: 1rem;
+  }
+}
+
+.table-container {
+  background-color: $bg-secondary;
+  border-radius: 8px;
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: (rgba(0, 0, 0, 0.238) 35%,); 
+    border-radius: 1px; 
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: lighten-color(rgba(0, 0, 0, 0.238) 35%,); 
+  }
+
+  &::-webkit-scrollbar-track {
+    background:  rgba(45, 45, 45, 0.8); 
+  }
+
+  table {
+    width: 100%;
+    background: #252525;
+
+    th {
+      background-color: darken-color($bg-secondary, 3%);
+      color: $text-primary;
+      font-weight: 500;
+    }
+
+    td {
+      color: $text-secondary;
+    }
+
+    tr {
+      &:hover {
+        background-color: rgba($accent-primary, 0.05);
+      }
+    }
+
+    .editing-row {
+      background-color: rgba($accent-primary, 0.1);
+
+      td {
+        padding: 8px;
+
+        .scroll-container {
+          display: flex;
+          overflow-x: auto; 
+          padding: 8px 0;
+
+          &::-webkit-scrollbar {
+            height: 8px;
+          }
+
+          &::-webkit-scrollbar-thumb {
+            background: $accent-primary;
+            border-radius: 4px;
+          }
+
+          &::-webkit-scrollbar-track {
+            background: $bg-secondary;
+          }
+
+          mat-form-field {
+            flex: 0 0 auto; 
+            width: 200px; 
+            margin-right: 8px;
+
+            mat-form-field-wrapper {
+              padding-bottom: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.paginator {
+  color: white;
+  background: #252525;
+}
+
+section {
+  margin-left: 65px;
+}
+
+::ng-deep {
+  .mat-form-field {
+    width: 100%;
+
+    .mat-form-field-flex {
+      background-color: rgba(45, 45, 45, 0.9) !important;
+    }
+
+    .mat-form-field-outline {
+      color: $text-secondary !important;
+    }
+
+    input.mat-input-element,
+    textarea.mat-input-element {
+      color: $text-primary !important;
+      caret-color: $text-primary !important;
+    }
+
+    .mat-select-value,
+    .mat-select-arrow {
+      color: $text-primary !important;
+    }
+
+    .mat-form-field-label {
+      color: $text-secondary !important;
+    }
+
+    &.mat-focused {
+      .mat-form-field-label {
+        color: $accent-primary !important;
+      }
+
+      .mat-form-field-outline {
+        color: $accent-primary !important;
+      }
+    }
+  }
+
+  .mat-select-panel {
+    background: $bg-secondary !important;
+
+    .mat-option {
+      color: $text-primary !important;
+
+      &:hover:not(.mat-option-disabled) {
+        background: rgba($accent-primary, 0.1) !important;
+      }
+
+      &.mat-selected:not(.mat-option-disabled) {
+        color: $accent-primary !important;
+        background: rgba($accent-primary, 0.1) !important;
+      }
+
+      mat-option-text {
+        color: $text-primary !important;
+      }
+    }
+  }
+
+  .mat-datepicker-content {
+    background-color: $bg-secondary !important;
+
+    .mat-calendar {
+      background-color: $bg-secondary !important;
+
+      .mat-calendar-body-cell-content {
+        color: $text-primary !important;
+      }
+
+      .mat-calendar-body-selected {
+        background-color: $accent-primary !important;
+        color: $text-primary !important;
+      }
+
+      .mat-calendar-header,
+      .mat-calendar-table-header,
+      .mat-calendar-body-label {
+        color: $text-primary !important;
+      }
+    }
+  }
+
+  input[type="file"] {
+    color: $text-primary !important;
+
+    &::file-selector-button {
+      background-color: $bg-secondary !important;
+      color: $text-primary !important;
+      border: 1px solid $text-secondary !important;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-right: 8px;
+
+      &:hover {
+        background-color: rgba($accent-primary, 0.1) !important;
+        border-color: $accent-primary !important;
+      }
+    }
+  }
+
+  input[type="number"] {
+    color: $text-primary !important;
+  }
+
+  textarea {
+    color: $text-primary !important;
+  }
+}
+
+:host {
+  .mat-select-trigger {
+    color: $text-primary !important;
+  }
+
+  .mat-form-field-appearance-outline {
+    .mat-form-field-outline {
+      color: $text-secondary;
+    }
+
+    &.mat-focused {
+      .mat-form-field-outline {
+        color: $accent-primary;
+      }
+    }
+  }
+}
+@function darken-color($color,$percentage)
+{
+@return color-mix(rgb(0, 0, 0),$color,$percentage);
+}
+.NoDataMessage
+{
+  display: flex;
+  justify-content: center;
+  color: white;
+}

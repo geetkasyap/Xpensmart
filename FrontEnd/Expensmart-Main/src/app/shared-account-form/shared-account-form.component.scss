@@ -1,0 +1,142 @@
+@use "sass:math";
+$bg-primary: #1a1a1a;
+$bg-secondary: #2d2d2d;
+
+$text-primary: #dadada;
+$text-secondary: #dfdfdf;
+$accent-primary: #6C63FF;
+$accent-secondary: #44006b;
+$error-color: #ff4d4d;
+$input-bg: rgba(45, 45, 45, 0.9);
+$card-bg: rgba(45, 45, 45, 0.8);
+
+.background-radial-gradient {
+  background-color: $bg-primary;
+  background-image: radial-gradient(
+    650px circle at 0% 0%,
+    rgba(108, 99, 255, 0.15) 15%,
+    rgba(108, 99, 255, 0.1) 35%,
+    rgba(26, 26, 26, 0.9) 75%,
+    rgba(26, 26, 26, 1) 80%,
+    transparent 100%
+  );
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+.Textbox
+{
+  border-color: #f33636;
+    display: flex; justify-content: center; align-items: center;
+  color: linear-gradient(45deg, #1a1a1a 0%, #2d2d2d 100%);
+
+}
+.currency-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.currency-symbol {
+  position: absolute;
+  color: rgba($accent-primary, 0.2);
+  font-size: 2rem;
+  font-weight: bold;
+  animation: float-currency 15s linear infinite;
+  
+  @for $i from 1 through 15 {
+    &:nth-child(#{$i}) {
+      left: #{math.random() * 100}vw;
+      top: -30px;
+      animation-delay: #{math.random() * 15}s;
+      animation-duration: #{10 + math.random() * 20}s;
+      font-size: #{1.5 + math.random() * 2}rem;
+      opacity: #{0.1 + math.random() * 0.3};
+    }
+  }
+}
+@keyframes float-currency {
+  0% {
+    transform: translateY(-30px) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+section {
+  margin-left: 70px;
+}
+.custom-input
+{
+background-color: #2d2d2d;
+border: 1px solid rgba(108, 99, 255, 0.1);
+transition: all 0.3s ease;
+color: #dadada;
+}
+.card
+{
+  background-color: $card-bg;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  margin-top: 2rem;
+}
+.btn-secondary {
+  background-color: rgba($accent-primary, 0.8);
+  border: 1px solid rgba($accent-primary, 0.5);
+  color: $text-primary;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: rgba($accent-primary, 1);
+    border-color: rgba($accent-primary, 0.7);
+  }
+}
+::placeholder {
+  color:white;
+  opacity: 0.1; 
+}
+.dropdown-menu {
+  background-color: $bg-secondary;
+  border: 1px solid rgba($accent-primary, 0.1);
+  max-height: 200px;
+  overflow-y: auto;
+ 
+  .dropdown-item {
+    color: $text-primary;
+    transition: all 0.2s ease;
+   
+    &:hover {
+      background-color: rgba($accent-primary, 0.1);
+      color: $accent-primary;
+    }
+  }
+}
+.buttons
+{
+  button {
+    background: $accent-primary;
+    border: none;
+    padding: 0.5rem 1rem;
+    color: $text-primary;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    
+    &:hover {
+      background: $accent-secondary;
+    }
+  }
+}

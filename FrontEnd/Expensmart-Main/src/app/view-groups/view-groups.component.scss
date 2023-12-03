@@ -1,0 +1,310 @@
+@use "sass:math";
+$bg-primary: #1a1a1a;
+$bg-secondary: #2d2d2d;
+
+$text-primary: #dadada;
+$text-secondary: #dfdfdf;
+$accent-primary: #6C63FF;
+$accent-secondary: #44006b;
+$error-color: #ff4d4d;
+$input-bg: rgba(45, 45, 45, 0.9);
+$card-bg: rgba(45, 45, 45, 0.8);
+
+.background-radial-gradient {
+  background-color: $bg-primary;
+  background-image: radial-gradient(
+    650px circle at 0% 0%,
+    rgba(108, 99, 255, 0.15) 15%,
+    rgba(108, 99, 255, 0.1) 35%,
+    rgba(26, 26, 26, 0.9) 75%,
+    rgba(26, 26, 26, 1) 80%,
+    transparent 100%
+  );
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.currency-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.currency-symbol {
+  position: absolute;
+  color: rgba($accent-primary, 0.2);
+  font-size: 2rem;
+  font-weight: bold;
+  animation: float-currency 15s linear infinite;
+
+  @for $i from 1 through 15 {
+    &:nth-child(#{$i}) {
+      left: #{math.random() * 100}vw;
+      top: -30px;
+      animation-delay: #{math.random() * 15}s;
+      animation-duration: #{10 + math.random() * 20}s;
+      font-size: #{1.5 + math.random() * 2}rem;
+      opacity: #{0.1 + math.random() * 0.3};
+    }
+  }
+}
+
+@keyframes float-currency {
+  0% {
+    transform: translateY(-30px) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.group-bubble {
+  width: 50px;
+  height: 50px;
+  background-color: $accent-primary;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 1.5rem;
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba($accent-primary, 0.5);
+  }
+}
+
+.bubble-tooltip {
+  position: absolute;
+  bottom: 110%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  white-space: nowrap;
+  z-index: 10;
+  font-size: 0.9rem;
+}
+
+.expense-card {
+  background-color: $card-bg;
+  border-radius: 10px;
+  padding: 15px;
+  color: $text-primary;
+  width: 40%;
+
+  &.my-expense {
+    margin-left: auto;
+    text-align: right; 
+  }
+
+  &.other-expense {
+    margin-right: auto;
+    text-align: left;
+  }
+}
+
+.expense-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.expense-details {
+  font-size: 0.9rem;
+}
+.modal{
+  --bs-modal-width: 1000px;
+}
+.modal-content {
+  background-color: rgba(45, 45, 45, 0.95);
+  border: none;
+  border-radius: 10px;
+}
+
+.modal-header {
+  border-bottom: none;
+}
+
+.modal-title {
+  color: $text-primary;
+}
+
+.modal-body {
+  padding: 15px;
+}
+
+.btn-primary {
+  background-color: $accent-primary;
+  border: none;
+
+  &:hover {
+    background-color: darken-color($accent-primary, 10%);
+  }
+}
+@function darken-color($color,$percentage)
+{
+@return color-mix(rgb(0, 0, 0),$color,$percentage);
+}
+
+.background-radial-gradient-reconciliation {
+  background-color: $bg-primary;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: baseline;
+}
+.card 
+{
+  background-color: $card-bg;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  margin-top: 2rem;
+  color: white;
+  width: 800px;
+
+}
+.custom-input {
+  background-color: $input-bg;
+  border: 1px solid rgba($accent-primary, 0.1);
+  color: $text-primary;
+  transition: all 0.3s ease;
+  &:focus {
+    background-color: rgba($input-bg, 0.95);
+    border-color: $accent-primary;
+    box-shadow: 0 0 15px rgba($accent-primary, 0.2);
+  }
+}
+section
+{
+  margin-left: 70px;
+}
+.custom-input[type="file"] {
+  background-color: $input-bg; 
+  border: 1px solid rgba($accent-primary, 0.1);
+  color: $text-primary;
+  padding: 10px;
+  transition: all 0.3s ease;
+
+  &:focus {
+    background-color: rgba($input-bg, 0.95);
+    border-color: $accent-primary;
+    box-shadow: 0 0 15px rgba($accent-primary, 0.2);
+  }
+
+  &::-webkit-file-upload-button {
+    visibility: hidden;
+  }
+
+  &::before {
+    content: 'Choose File'; 
+    display: inline-block;
+    background: $accent-primary;
+    color: $text-primary;
+    padding: 10px 15px;
+    border-radius: 12px;
+    cursor: pointer; 
+  }
+
+  &:hover::before {
+    background: darken-color($accent-primary, 10%);
+  }
+
+  @function darken-color($color,$percentage)
+  {
+  @return color-mix(rgb(0, 0, 0),$color,$percentage);
+  }
+}
+.form-outline mb-4
+{
+color: #dadada;
+}
+input[type="date"] {
+  &::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    opacity: 0.5;
+    cursor: pointer;
+    
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+.dropdown-menu {
+  background-color: $bg-secondary;
+  border: 1px solid rgba($accent-primary, 0.1);
+  
+  .dropdown-item {
+    color: $text-primary;
+    
+    &:hover {
+      background-color: rgba($accent-primary, 0.1);
+      color: $accent-primary;
+    }
+  }
+}
+.custom-input {
+  background-color: $input-bg;
+  border: 1px solid rgba($accent-primary, 0.1);
+  color: $text-primary;
+  transition: all 0.3s ease;
+  
+  &:focus {
+    background-color: rgba($input-bg, 0.95);
+    border-color: $accent-primary;
+    box-shadow: 0 0 15px rgba($accent-primary, 0.2);
+    animation: glow 1.5s ease-in-out infinite alternate;
+  }
+  
+  &.is-invalid {
+    border-color: $error-color;
+    animation: error-glow 1.5s ease-in-out infinite alternate;
+  }
+}
+.example-form-fields {
+  display: flex;
+  align-items: flex-start;
+  height: 100%;
+}
+.example-container
+{
+  display: flex; justify-content: center; align-items: center; 
+}
+.example-button-row
+{
+display: flex; justify-content: center; align-items: center; 
+}
+::placeholder {
+  color:white !important;
+  opacity: 0.1 !important; 
+}
+.NoneButton
+{
+  display: none;
+}
+.Nonecard
+{
+  display: none;
+}

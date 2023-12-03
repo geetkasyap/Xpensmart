@@ -1,0 +1,223 @@
+<section class="background-radial-gradient overflow-hidden">
+    <div class="currency-container">
+        <span class="currency-symbol">$</span>
+        <span class="currency-symbol">€</span>
+        <span class="currency-symbol">£</span>
+        <span class="currency-symbol">¥</span>
+        <span class="currency-symbol">₹</span>
+     
+        <span class="currency-symbol">$</span>
+        <span class="currency-symbol">€</span>
+        <span class="currency-symbol">£</span>
+        <span class="currency-symbol">¥</span>
+        <span class="currency-symbol">₹</span>
+        <span class="currency-symbol">$</span>
+        <span class="currency-symbol">€</span>
+        <span class="currency-symbol">£</span>
+        <span class="currency-symbol">¥</span>
+        <span class="currency-symbol">₹</span>
+        <span class="currency-symbol">$</span>
+        <span class="currency-symbol">€</span>
+    </div>
+
+    <div class="container-fluid px-4 py-5 px-md-5 text-lg-start my-5">
+      <div class="row justify-content-center">
+        <div class="user-selection">
+          <span style="color: white; background-color: transparent; font-size: 1.5em; font-weight: bolder" >Select Your Shared User : </span>
+          <select [(ngModel)]="selectedUser" (change)="onUserChange()">
+            <option value="" disabled selected>--select your shared user--</option>
+            <option *ngFor="let user of users" [value]="user.userID">{{user.userName}}</option>
+          </select>
+        </div>
+        <div class="col-lg-6 pe-lg-2">
+          <div class="card bg-glass">
+            <div class="card-body px-4 py-5">
+              <h2 class="text-center text-white mb-5">User 1 Expense</h2>
+              <form [formGroup]="expenseForm1" (ngSubmit)="onSubmit(1)">
+                <div class="form-outline mb-4">
+                  <div class="input-group">
+                    <button type="button" class="btn btn-outline-secondary dropdown-toggle currency-selector"
+                            data-bs-toggle="dropdown">
+                      {{ selectCurrency(1) }}
+                    </button>
+                    <input type="number"
+                           formControlName="amount"
+                           class="form-control custom-input"
+                           [ngClass]="{'is-invalid': expenseForm1.get('amount')?.errors && expenseForm1.get('amount')?.touched}"
+                           step="0.01"
+                           min="0">
+                  </div>
+                  <div class="invalid-feedback" *ngIf="expenseForm1.get('amount')?.touched">
+                    <span *ngIf="expenseForm1.get('amount')?.errors?.['required']">Amount is required</span>
+                    <span *ngIf="expenseForm1.get('amount')?.errors?.['min']">Amount cannot be negative</span>
+                  </div>
+                </div>
+                <div class="form-outline mb-4">
+                    <input type="date"
+                           formControlName="date"
+                           class="form-control custom-input"
+                           [ngClass]="{'is-invalid': expenseForm1.get('date')?.errors && expenseForm1.get('date')?.touched}">
+                    <div class="invalid-feedback" *ngIf="expenseForm1.get('date')?.touched">
+                      Date is required
+                    </div>
+                  </div>
+    
+  
+                  <div class="form-outline mb-4">
+                    <select formControlName="categoryID"
+                            class="form-control custom-input"
+                            [ngClass]="{'is-invalid': expenseForm1.get('categoryID')?.errors && expenseForm1.get('categoryID')?.touched}">
+                      <option value="">Select Category</option>
+                      <option *ngFor="let category of categories" [value]="category.categoryID">
+                        {{ category.name }}
+                      </option>
+                    </select>
+                    <div class="invalid-feedback" *ngIf="expenseForm1.get('categoryID')?.touched">
+                      Category is required
+                    </div>
+                  </div>
+  
+                  <div class="form-outline mb-4">
+                    <input #fileInput type="file" (change)="onFileSelected1($event)" class="form-control custom-input" id="FileInput"/>
+                  </div>
+  
+                  <div class="form-outline mb-4">
+                    <textarea formControlName="description"
+                              class="form-control custom-input"
+                              rows="3"
+                              placeholder="Description*"
+                              [ngClass]="{'is-invalid': expenseForm1.get('description')?.errors && expenseForm1.get('description')?.touched}">
+                    </textarea>
+                    <div class="char-count" [class.text-danger]="expenseForm1.get('description')?.value?.length > 450">
+                      {{ expenseForm1.get('description')?.value?.length || 0 }}/500
+                    </div>
+                    <div class="invalid-feedback" *ngIf="expenseForm1.get('description')?.touched">
+                      <span *ngIf="expenseForm1.get('description')?.errors?.['required']">Description is required</span>
+                      <span *ngIf="expenseForm1.get('description')?.errors?.['maxlength']">Description is too long</span>
+                    </div>
+                  </div>
+    
+                  <div class="form-outline mb-4">
+                    <select formControlName="expenseType"
+                            class="form-control custom-input"
+                            [ngClass]="{'is-invalid': expenseForm1.get('expenseType')?.errors && expenseForm1.get('expenseType')?.touched}">
+                      <option *ngFor="let type of expenseTypes" [value]="type">
+                        {{ type }}
+                      </option>
+                    </select>
+                    <div class="invalid-feedback" *ngIf="expenseForm1.get('expenseType')?.touched">
+                      Expense type is required
+                    </div>
+                  </div>
+
+                <button type="submit" class="btn btn-primary btn-block"
+                        [disabled]="expenseForm1.invalid || isLoading">
+                  Add Expense for User 1
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6 ps-lg-2">
+          <div class="card bg-glass">
+            <div class="card-body px-4 py-5">
+              <h2 class="text-center text-white mb-5">User 2 Expense</h2>
+              <form [formGroup]="expenseForm2" (ngSubmit)="onSubmit(2)">
+                <div class="form-outline mb-4">
+                  <div class="input-group">
+                    <button type="button" class="btn btn-outline-secondary dropdown-toggle currency-selector"
+                            data-bs-toggle="dropdown">
+                      {{ selectCurrency(2) }}
+                    </button>
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" *ngFor="let currency of currencies"
+                         (click)="changeCurrency(currency.code, 2)">
+                        {{ currency.symbol }} {{ currency.code }}
+                      </a>
+                    </div>
+                    <input type="number"
+                           formControlName="amount"
+                           class="form-control custom-input"
+                           [ngClass]="{'is-invalid': expenseForm2.get('amount')?.errors && expenseForm2.get('amount')?.touched}"
+                           step="0.01"
+                           min="0">
+                  </div>
+                  <div class="invalid-feedback" *ngIf="expenseForm2.get('amount')?.touched">
+                    <span *ngIf="expenseForm1.get('amount')?.errors?.['required']">Amount is required</span>
+                    <span *ngIf="expenseForm1.get('amount')?.errors?.['min']">Amount cannot be negative</span>
+                  </div>
+                </div>
+                <div class="form-outline mb-4">
+                    <input type="date"
+                           formControlName="date"
+                           class="form-control custom-input"
+                           [ngClass]="{'is-invalid': expenseForm2.get('date')?.errors && expenseForm2.get('date')?.touched}">
+                    <div class="invalid-feedback" *ngIf="expenseForm2.get('date')?.touched">
+                      Date is required
+                    </div>
+                  </div>
+    
+  
+                  <div class="form-outline mb-4">
+                    <select formControlName="categoryID"
+                            class="form-control custom-input"
+                            [ngClass]="{'is-invalid': expenseForm2.get('categoryID')?.errors && expenseForm2.get('categoryID')?.touched}">
+                      <option value="">Select Category</option>
+                      <option *ngFor="let category of categories" [value]="category.categoryID">
+                        {{ category.name }}
+                      </option>
+                    </select>
+                    <div class="invalid-feedback" *ngIf="expenseForm2.get('categoryID')?.touched">
+                      Category is required
+                    </div>
+                  </div>
+  
+                  <div class="form-outline mb-4">
+                    <input #fileInput type="file" (change)="onFileSelected2($event)" class="form-control custom-input" id="FileInput"/>
+                  </div>
+  
+                  <div class="form-outline mb-4">
+                    <textarea formControlName="description"
+                              class="form-control custom-input"
+                              rows="3"
+                              placeholder="Description"
+                              [ngClass]="{'is-invalid': expenseForm2.get('description')?.errors && expenseForm2.get('description')?.touched}">
+                    </textarea>
+                    <div class="char-count" [class.text-danger]="expenseForm2.get('description')?.value?.length > 450">
+                      {{ expenseForm2.get('description')?.value?.length || 0 }}/500
+                    </div>
+                    <div class="invalid-feedback" *ngIf="expenseForm2.get('description')?.touched">
+                      <span *ngIf="expenseForm2.get('description')?.errors?.['required']">Description is required</span>
+                      <span *ngIf="expenseForm2.get('description')?.errors?.['maxlength']">Description is too long</span>
+                    </div>
+                  </div>
+    
+                  <div class="form-outline mb-4">
+                    <select formControlName="expenseType"
+                            class="form-control custom-input"
+                            [ngClass]="{'is-invalid': expenseForm2.get('expenseType')?.errors && expenseForm2.get('expenseType')?.touched}">
+                      <option *ngFor="let type of expenseTypes" [value]="type">
+                        {{ type }}
+                      </option>
+                    </select>
+                    <div class="invalid-feedback" *ngIf="expenseForm2.get('expenseType')?.touched">
+                      Expense type is required
+                    </div>
+                  </div>
+                <button type="submit" class="btn btn-primary btn-block"
+                        [disabled]="expenseForm2.invalid || isLoading">
+                  Add Expense for User 2
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+  

@@ -1,0 +1,90 @@
+<section class="background-radial-gradient">
+  <div class="currency-container">
+    <span class="currency-symbol">$</span>
+    <span class="currency-symbol">€</span>
+    <span class="currency-symbol">£</span>
+    <span class="currency-symbol">¥</span>
+    <span class="currency-symbol">₹</span>
+    <span class="currency-symbol">€</span>
+    <span class="currency-symbol">£</span>
+    <span class="currency-symbol">¥</span>
+    <span class="currency-symbol">₹</span>
+    <span class="currency-symbol">$</span>
+    <span class="currency-symbol">€</span>
+    <span class="currency-symbol">£</span>
+    <span class="currency-symbol">¥</span>
+    <span class="currency-symbol">₹</span>
+    <span class="currency-symbol">$</span>
+    <span class="currency-symbol">€</span>
+    <span class="currency-symbol">£</span>
+  </div>
+    <div class="container py-5">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="card bg-glass">
+            <div class="card-body p-4">
+              <h2 class="text-center mb-4 text-light">Shared Account</h2>
+  
+              <form [formGroup]="sharedAccountForm" (ngSubmit)="onSubmit()" class="animate__animated animate__fadeIn">
+  
+                <div class="mb-3">
+                  <label class="form-label text-light">Select User</label>
+                  <input type="text" 
+                         class="form-control custom-input" 
+                         formControlName="userSearch"
+                         placeholder="Type to search users"
+                         [ngClass]="{'is-invalid': selectedUsers.length === 0 && sharedAccountForm.get('userSearch')?.touched}">
+                  
+                  <div class="dropdown-menu show" *ngIf="filteredUsers.length > 0">
+                    <button type="button" 
+                            class="dropdown-item" 
+                            *ngFor="let user of filteredUsers"
+                            (click)="selectUser (user)" >
+                      {{user}}
+                    </button>
+                  </div>
+  
+                  <div class="mt-2" *ngIf="selectedUsers.length > 0">
+                    <span class="badge bg-primary me-2 mb-2 animate__animated animate__fadeIn">
+                      {{selectedUsers[0]}}
+                      <button type="button" class="btn-close btn-close-white ms-2" 
+                              (click)="removeUser (0)"></button>
+                    </span>
+                  </div>
+                </div>
+  
+                <div class="mb-3">
+                  <label class="form-label text-light">Notification Message</label>
+                  <input type="text" 
+                         class="form-control custom-input" 
+                         formControlName="notificationMessage"
+                         placeholder="Enter notification message"
+                         required 
+                         maxlength="200"
+                         [ngClass]="{'is-invalid': sharedAccountForm.get('notificationMessage')?.invalid && sharedAccountForm.get('notificationMessage')?.touched}">
+                  <div class="invalid-feedback" *ngIf="sharedAccountForm.get('notificationMessage')?.errors?.['required']">
+                    Message is required
+                  </div>
+                </div>
+  
+                <div class="d-grid">
+                  <button type="submit" 
+                          class="btn btn-primary"
+                          [disabled]="sharedAccountForm.invalid || isSubmitting || selectedUsers.length === 0">
+                    <span class="spinner-border spinner-border-sm me-2" *ngIf="isSubmitting"></span>
+                    Send Invitation
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center mt-4 buttons">
+      <button type="button" class="btn btn-secondary me-2" (click)="SharedExpenseReports()">Shared Expense Reports</button>
+      <button type="button" class="btn btn-secondary me-2" (click)="SharedExpenseTable()">Shared Expense Table</button>
+      <button type="button" class="btn btn-secondary me-2" (click)="AddSharedExpense()">Add Shared Expense</button>
+
+    </div>
+  </section>
